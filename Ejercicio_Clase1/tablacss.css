@@ -1,0 +1,22 @@
+table{
+    background-color: blanchedalmond;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+}
+
+.thx{
+    background-color: aqua;
+    padding: 5px;
+}
+.thnumber{
+    background-color: olive;
+    padding: 5px;
+    margin: 5px;
+}
+
+.tdnumber{
+    background-color: greenyellow;
+    padding: 5px;
+    margin: 5px;
+}
