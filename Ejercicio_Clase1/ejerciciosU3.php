@@ -175,18 +175,140 @@
     ];
 
     echo "<table border = 1>";
+    
     echo "<tr>";
     foreach ($madrid as $mes => $temperatura){
         echo "<td>$mes</td>";
-        echo "</tr>";
     }
+    echo "</tr>";
 
+    echo "<tr>";
     foreach ($madrid as $mes => $temperatura){
-        echo "<tr><td>$temperatura</td></tr>";
+        echo "<td>$temperatura</td>";
     }
+    echo "</tr>";
     echo "</table>";
 
     ?>
+
+    <h2>Ejercicio 9</h2>
+    <p>Realiza un programa que escoja al azar 10 cartas de la baraja y que diga 
+    cuántos puntos suman según el juego de la brisca (los ases valen 11, 
+    los treses 10, las sotas 2, los caballos 3, los reyes 4, todas las demás 0). 
+    Emplea un array asociativo para obtener los puntos a partir del nombre de la 
+    figura de la carta.
+    Pista: utiliza todos los arrays que necesites (uno de palos, otro de numeros,
+    otro de puntos, otro en el que vayas guardando las cartas que han salido... 
+    ¡todos los que necesites!)</p>
+    <?php
+
+    $palos = array (
+        "oro",
+        "bastos",
+        "espadas",
+        "copas"
+    );
+
+    $cartas = [
+        "As" => 11,
+        "2"=> 0,
+        "3"=> 10,
+        "4"=> 0,    
+        "5"=> 0,
+        "6"=> 0,
+        "7" => 0,
+        "sota" => 2,
+        "caballo" => 3,
+        "rey" => 4
+    ];
+
+    $puntos = 0;
+    $jugada = [];
+    $cartasUsadas = [];
+    $keys = array_keys($cartas);
+
+    for ($i = 0; $i < 10; $i++){
+        $p = random_int(0, count ($palos) -1);    // se le pone -1 para que el random no me genere otro número más sino que vaya del 0 al 3 que son las 4 opciones de palos que tengo
+        $c = random_int(0, count ($cartas) -1); 
+        $nombreCarta = $keys[$c];   // Ej: "As" Muestra el nombre de la carta conviertiendose en otro array con sus valores
+        $valorCarta = $cartas[$nombreCarta]; // Ej: "11" Muestra el valor del array que hemos creado anteiormente, es decir, nos da el numero del array cartas
+        $palo = $palos[$p]; //  Ej: "copas" muestra los palos (1º array creado)
+        $puntos += $valorCarta; // pues te suma los puntos de las 10 cartas que salen al azar
+
+        echo "<ul><li>";
+        echo $nombreCarta . " tiene un valor de " . $valorCarta . " puntos, del palo " . $palo . ". ";
+        echo "</li></ul>";
+
+    }
+
+    echo "El total de puntos es " . $puntos . " .";
+
+    // OPCIÓN DE KELVIS
+    // Una vez creados los arrays lo que hace es crear un último array para que los valores guarden la posición, es decir, justo antes de $puntos += valorCarta;
+    //  $cartaFinal = [$valorCarta, $palo, $puntos];
+    // y una vez que tenemos ese array fuera del for se haria un foreach para recorrer dicho array y mostras los valores
+    // foreach ($cartaFinal as $k){
+    //      echo "$k";
+    // }
+    // echo "<p>$k[0] tiene $k[2] y es del palo $k[1]</p>;
+    ?>
+
+    <h3>Ejercicio 10</h3>
+    <p>Modifica el juego anterior para asegurarte de que no se repite ninguna carta, igual que
+    si las hubieras cogido de una baraja de verdad.</p>
+    <?php
+
+    $palos = array (
+        "oro",
+        "bastos",
+        "espadas",
+        "copas"
+    );
+
+    $cartas = [
+        "As" => 11,
+        "2"=> 0,
+        "3"=> 10,
+        "4"=> 0,    
+        "5"=> 0,
+        "6"=> 0,
+        "7" => 0,
+        "sota" => 2,
+        "caballo" => 3,
+        "rey" => 4
+    ];
+
+    $puntos = 0;
+    $jugada = [];
+    $cartasUsadas = [];
+    $keys = array_keys($cartas);
+
+    for ($i = 0; $i < 10; $i++){
+        $c = random_int(0, count ($cartas) -1); 
+        $nombreCarta = $keys[$c];   
+        $valorCarta = $cartas[$nombreCarta];
+        $palo = $palos[$p]; 
+        $puntos += $valorCarta; 
+
+        echo "<ul><li>";
+        echo $nombreCarta . " tiene un valor de " . $valorCarta . " puntos, del palo " . $palo . ". ";
+        echo "</li></ul>";
+
+    }
+
+    echo "El total de puntos es " . $puntos . " .";
+
+
+
+
+    ?>
+
+
+
+
+
+
+
 
 
 

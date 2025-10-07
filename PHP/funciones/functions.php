@@ -66,6 +66,38 @@ function matricula($student, $school, $course = "DAW", $year = 2025)   //los opc
     return "<p>$student matriculado en  $course en $year en el IES $school</p>";
 }
 
+function addOne ($num) 
+{
+    $num++;
+    return $num;
+}
+
+function substract($firstNumber,...$numbers)      // los ... indica infinitos número
+{
+    $result  = $firstNumber;
+    foreach($numbers as $n){
+        $result -= $n;
+    }
+    return $result;
+}
+
+/**
+ * Concatenar las cadenas de texto recibidas como parámetros.
+ * Tiene que haber al menos 2, y si no devolver false. 
+ * @param array $texts  cadenas de texto o concatenar.
+ * @return string|boolean cadena concatenada o false su había menos de dos. 
+ */
+function concat(... $texts)
+{
+    if (count($texts) < 2){
+        return false;
+    }
+    $result = "";
+    foreach($texts as $n){
+        $result .= $n;
+    }
+    return $result;
+}
 
 
 

@@ -72,7 +72,58 @@ include("./functions.php");
     incrementReference($number);
     echo "<p>$number</p>";
 
+    function testRV(&$a, $b, &$c, $d = 8)
+    {
+        $a++;
+        $b++;
+        $c++;
+        $d++;
+    }
+    $a = 1;
+    $b = 2;
+    $c = 3;
+    $d = 4;
+    testRV($a, $b, $c, $d); 
+    var_dump($a);  // sale 2  porque al tener el & delante se guarda el incremento
+    var_dump($b);  // sale 2  no se incremente porque solo hace una copia
+    var_dump($c);  // sale 4  porque al tener el & delante se guarda el incremento
+    var_dump($d);  // sale 4  porque aunque tenga un valor predefinod de 8 al darle valor de 4 sale lo que se le indica
     
+
+    echo"<br>";
+    $edad = 17;
+    $edad = addOne($edad);
+    var_dump($edad);
+    ?>
+
+    <h3>Funciones con un número variable de parámetros</h3>
+    <?php
+    echo "uno ", " dos ", " tres ";   // para imprimir varios parámetros
+    echo"<br>";
+    max(4,8);//una cantidad variables de varios números
+    max (4, 9, 11, -4);
+    max(4, 9, 11, -4, 889, 10);
+
+    // Aqui se hace 4 - 3 y sale 1
+    $rest = substract (4,3);
+    var_dump($rest);
+    echo"<br>";
+
+    // Sale 4 porque este numero es la varible que se pide, pero puede ser que no haya numero que restarle
+    $rest = substract (4);
+    var_dump($rest);
+    echo"<br>";
+
+    // Esto da ERROR porque le primera variable es obligatoria 
+    //$rest = substract ();
+    //var_dump($rest);
+
+    
+
+
+
+
+
 
     ?>
     
