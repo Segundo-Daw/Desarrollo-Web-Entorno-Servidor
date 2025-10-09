@@ -284,24 +284,93 @@
     $keys = array_keys($cartas);
 
     for ($i = 0; $i < 10; $i++){
+        $p = random_int(0, count ($palos) -1); 
         $c = random_int(0, count ($cartas) -1); 
         $nombreCarta = $keys[$c];   
-        $valorCarta = $cartas[$nombreCarta];
         $palo = $palos[$p]; 
-        $puntos += $valorCarta; 
+        $cartaUnica = $nombreCarta;
+
+        if (in_array($cartaUnica, $cartasUsadas) ){
+            $i--;   //esto se utiliza por si se repite la iteracion no valdria y voleria a hacerlo ¡Truquito!
+        }else{
+        $cartasUsadas[] = $cartaUnica;
+        $valorCarta = $cartas[$nombreCarta];
+        $puntos += $valorCarta;
 
         echo "<ul><li>";
-        echo $nombreCarta . " tiene un valor de " . $valorCarta . " puntos, del palo " . $palo . ". ";
+        echo $cartaUnica . " de " . $palo .  " tiene un valor de " . $valorCarta . ". ";
         echo "</li></ul>";
+        }
 
     }
-
     echo "El total de puntos es " . $puntos . " .";
-
-
-
-
     ?>
+
+    <h3>Ejercicio 11</h3>
+    <p>Crea un minidiccionario castellano-inglés que contenga, al menos, 10 palabras (con su traducción). 
+    Utiliza un array asociativo para guardar las parejas de palabras. A continuación, muestra aleatoriamente 
+    (rand()) una palabra en castellano y su traducción al inglés.</p>
+    <?php
+        $diccionario = [
+            "coche" => "car",
+            "flor" => "flower",
+            "hola" => "hello",
+            "raton" => "mouse",
+            "cama" => "bed",
+            "silla" => "chair",
+            "amor" => "love",
+            "ordenador" => "computer",
+            "portatil" => "laptop",
+            "ventana" => "window"
+        ];
+
+        $palabras = array_keys($diccionario);
+
+        //para elegir una palabra aleatoria
+        $aleatorio = rand(0, count ($palabras) -1);
+        $palabraEspañol = $palabras[$aleatorio];
+        $palabraIngles = $diccionario[$palabraEspañol];
+    
+        echo "<p>La palabra $palabraEspañol  en ingles es $palabraIngles </p>";
+    ?>
+
+    <h3>Ejericicio 12</h3>
+    <p>Crea un array bidimensional de 10 filas y 10 columnas y rellénalos con números aleatorios entre 0 y 500. 
+    Asegúrate de que ningún número se repite. Imprime el contenido del array bidimensional en una "<"table>"</p>
+    <?php
+
+    //Creamos el array con todos los número del 0 al 500 y despues usamos el suffle para que no vayan en orden
+    $numerosDisponibles = range(0,500);
+    shuffle($numerosDisponibles);
+
+    //Como van a ser 10 filas con 10 columnas vamos a coger de sas 500 opciones solo 100 (10x10)
+    //array_slice hace que no se repitan lo números
+    $numerosSeleccionados = array_slice($numerosDisponibles, 0, 100);
+
+    // Crear array bidimensional 10x10 y rellenar con esos números
+    $matriz = [];
+    $contador = 0;
+    for ($i= 0; $i < 10; $i++) {            //mi $i son las filas
+        for ($j = 0; $j < 10; $j++) {       // mi $j son las columnas
+            $matriz[$i][$j] = $numerosSeleccionados[$contador];
+            $contador++;
+        }
+    }
+
+    echo "<table border='1' cellpadding='5' cellspacing=''>";
+    for ($i = 0; $i < 10; $i++) {
+        echo "<tr>";
+        for ($j = 0; $j < 10; $j++) {
+            echo "<td>" . $matriz[$i][$j] . "</td>";
+        }
+        echo "</tr>";
+    }
+
+    echo "</table>";
+
+?>
+
+
 
 
 
