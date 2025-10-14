@@ -367,8 +367,187 @@
     }
 
     echo "</table>";
+    ?>
 
-?>
+    <h3>Ejercicio 13</h3>
+    <p>
+    Dado el array que hay a continuación, haz e imprime los resultados de las siguientes operaciones:
+    $estudiantes = [
+        ["nombre" => "Ana García", "matematicas" => 8.5, "historia" => 7.0, "programacion" => 9.0],
+        ["nombre" => "Luis Martínez", "matematicas" => 6.0, "historia" => 8.5, "programacion" => 7.5],
+        ["nombre" => "Marta Rodríguez", "matematicas" => 9.0, "historia" => 6.5, "programacion" => 8.0],
+        ["nombre" => "Carlos López", "matematicas" => 7.5, "historia" => 9.0, "programacion" => 6.5],
+        ["nombre" => "Elena Torres", "matematicas" => 8.0, "historia" => 7.5, "programacion" => 9.5]
+    ]; 
+
+    1. Calcular el promedio de cada estudiante y agregarlo al array.
+    2. Encontrar a le estudiante con el promedio más alto
+    3. Contar cuántes estudiantes aprobaron cada materia (nota >= 7)
+    4. Crear un array con la nota máxima por materia
+    5. Ordenar estudiantes por promedio de forma descendente
+    </p>
+
+    <?php
+    $estudiantes = [
+        ["nombre" => "Ana García", "matematicas" => 8.5, "historia" => 7.0, "programacion" => 9.0],
+        ["nombre" => "Luis Martínez", "matematicas" => 6.0, "historia" => 8.5, "programacion" => 7.5],
+        ["nombre" => "Marta Rodríguez", "matematicas" => 9.0, "historia" => 6.5, "programacion" => 8.0],
+        ["nombre" => "Carlos López", "matematicas" => 7.5, "historia" => 9.0, "programacion" => 6.5],
+        ["nombre" => "Elena Torres", "matematicas" => 8.0, "historia" => 7.5, "programacion" => 9.5]
+    ];
+
+    /*1. Calcular el promedio de cada estudiante y agragarlo al array */
+    //En el foreach ponemos en esta caso el & porque es una forma de agregarlo en el array el nuevo elemento de forma permanente
+    foreach ($estudiantes as &$estudiante) {
+        $promedio = ($estudiante["matematicas"] + $estudiante["historia"] + $estudiante["programacion"]) /3;
+        /*Agregamos un nuevo elemento al array aosciativo con la clave "promedio" */
+        $estudiante["promedio"] = round($promedio, 2); /*el round redondea el valor y al poner el 1 hace que lo redondee a un decimal)   */
+    }
+    //Imprimir los resultados 
+    foreach($estudiantes as $estudiante) {
+        echo "Nombre: " . $estudiante["nombre"] . "<br>";
+        echo "Matemáticas: " . $estudiante["matematicas"] . "<br>";
+        echo "Historia: " . $estudiante["historia"] . "<br>";
+        echo "Programación: " . $estudiante["programacion"] . "<br>";
+        echo "Promedio: " . $estudiante["promedio"] . "<br>";
+        echo "<br><br>";
+    }
+
+
+    /*2.Encontrar a le estudiante con el promedio más alto */
+    //Vamos a asumir que el primero es el mejor para empezar a comparar
+    $mejorEstudiante = $estudiantes[0];
+
+    foreach($estudiantes as &$estudiante) {
+        if ($estudiante["promedio"] > $mejorEstudiante ["promedio"] ){
+            $mejorEstudiante = $estudiante;
+        } 
+    }
+    //Mostramos el resultado
+    echo "EL estudiante con el promedio más alto es " . $mejorEstudiante["nombre"] . "<br>";
+    echo "Su promedio es: " . $mejorEstudiante["promedio"] . "<br>";
+
+
+
+    /*3. Contar cuántes estudiantes aprobaron cada materia (nota >= 7)*/
+    $count = 0;
+    
+    // Recorremos con un for tradicional
+    for ($i = 0; $i < count($estudiantes); $i++) {
+        if ($estudiantes[$i]["matematicas"] >= 7) {
+            if ($estudiantes[$i]["historia"] >= 7){
+                if ($estudiantes[$i]["programacion"] >= 7){
+                    $count++;
+                    
+                }
+            }
+        }
+    }
+    
+
+    echo "El número de estudiantes que han aprobado todas las asignaturas con un 7 o más son:" . $count . "<br>";
+
+    /*4. Crear un array con la nota máxima por materia   */
+    $notaMaxima = [];
+    $maxH = 0;
+    $maxM = 0;
+    $maxP = 0;
+
+    for ($i = 0; $i < count($estudiantes); $i++) {
+        if ($estudiantes[$i]["matematicas"] > $maxM){
+            $maxM = $estudiantes[$i]["matematicas"];
+        }
+        if ($estudiantes[$i]["historia"] > $maxH){
+            $maxH = $estudiantes[$i]["historia"];
+        }
+        if ($estudiantes[$i]["programacion"] > $maxP){
+            $maxP = $estudiantes[$i]["programacion"];
+        }
+
+        $notaMaxima ["matematicas"] = round($maxM);
+        $notaMaxima["historia"] = round($maxH);
+        $notaMaxima["programacion"] = round($maxP);
+    }
+
+    echo "La nota máxima de matemáticas es un " . $notaMaxima["matematicas"] . " ,la de historia es un " .  $notaMaxima["historia"] . " , y la de programación es un  " . $notaMaxima["programacion"] . "<br>";
+    echo "<br>";
+
+    /*5. Ordenar estudiantes por promedio de forma descendente   */
+
+    // Usamos usort con una función de comparación
+    usort($estudiantes, function($a, $b) {
+        return $b["promedio"] <=> $a["promedio"]; // Descendente
+    });
+
+    // Mostrar resultados
+    echo "Estudiantes ordenados por promedio (descendente):<br>";
+    foreach ($estudiantes as $estudiante) {
+        echo $estudiante["nombre"] . " - Promedio: " . $estudiante["promedio"] . "<br>";
+    }
+    ?>
+
+    <h3>Ejercicio 14</h3>
+    <p>Dado el siguiente array, haz:
+    $hotel = [
+        "habitaciones" => [
+            101 => ["tipo" => "individual", "precio" => 50, "ocupada" => false, "dias_ocupada" => 0],
+            102 => ["tipo" => "doble", "precio" => 80, "ocupada" => true, "dias_ocupada" => 3],
+            103 => ["tipo" => "suite", "precio" => 150, "ocupada" => false, "dias_ocupada" => 0],
+            201 => ["tipo" => "individual", "precio" => 50, "ocupada" => true, "dias_ocupada" => 5],
+            202 => ["tipo" => "doble", "precio" => 80, "ocupada" => false, "dias_ocupada" => 0],
+            203 => ["tipo" => "suite", "precio" => 150, "ocupada" => true, "dias_ocupada" => 2]
+            ],
+        "reservas" => [
+            ["habitacion" => 102, "cliente" => "Juan Pérez", "dias" => 3],
+            ["habitacion" => 201, "cliente" => "María López", "dias" => 5],
+            ["habitacion" => 203, "cliente" => "Carlos Ruiz", "dias" => 2]
+        ]
+    ];
+
+    1. Mostrar habitaciones disponibles de un tipo específico ($tipo = "individual", por ejemplo).
+    2. Calcular ingresos totales del hotel
+    3. Reservar una habitación
+    4. Liberar una habitación y calcular el costo
+    5. Encontrar la habitación más rentable (que más ingresos genera)
+    </p>
+
+    <?php
+    $hotel = [
+        "habitaciones" => [
+            101 => ["tipo" => "individual", "precio" => 50, "ocupada" => false, "dias_ocupada" => 0],
+            102 => ["tipo" => "doble", "precio" => 80, "ocupada" => true, "dias_ocupada" => 3],
+            103 => ["tipo" => "suite", "precio" => 150, "ocupada" => false, "dias_ocupada" => 0],
+            201 => ["tipo" => "individual", "precio" => 50, "ocupada" => true, "dias_ocupada" => 5],
+            202 => ["tipo" => "doble", "precio" => 80, "ocupada" => false, "dias_ocupada" => 0],
+            203 => ["tipo" => "suite", "precio" => 150, "ocupada" => true, "dias_ocupada" => 2]
+            ],
+        "reservas" => [
+            ["habitacion" => 102, "cliente" => "Juan Pérez", "dias" => 3],
+            ["habitacion" => 201, "cliente" => "María López", "dias" => 5],
+            ["habitacion" => 203, "cliente" => "Carlos Ruiz", "dias" => 2]
+        ]
+    ];
+
+    /*1. Mostrar habitaciones disponibles de un tipo específico*/
+    foreach($hotel["habitaciones"] as $numHabitacion => $habitacion){
+        if($habitacion ["tipo"] == "individual" && $habitacion["ocupada"] == false){
+            echo "<br>La habitación $numHabitacion está disponible";
+        }
+    }
+
+    /* 2. Calcular ingresos totales del hotel  */
+    $ingresos = 0;
+
+    foreach($hotel["habitaciones"] as $numHabitacion => $habitacion){
+        $ingresos += $habitacion ["precio"];
+    }
+    echo "<br> Los ingresos totales son : $ingresos €.";
+
+
+
+    ?>
+
+
 
 
 
