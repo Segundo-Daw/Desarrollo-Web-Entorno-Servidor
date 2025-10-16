@@ -55,6 +55,9 @@ include("./funcionesXY.php");
             }  
         }
     }
+
+
+
     ?>
 
     <h3>Ejercicio 3</h3>
@@ -156,8 +159,9 @@ include("./funcionesXY.php");
     ];
 
     // Imprime por pantalla en un párrafo (p) la edad de la alumna que tiene DNI 2345X. El resultado es
-    echo ($alumnado["2345X"]["edad"]);
+    echo "<p>"($alumnado["2345X"]["edad"]). "</p>";
 
+    //otra forma de hacerlo recorriendo array
     foreach($alumnado as $dni => $valor){
          if($dni == "2345X"){
             echo "<p>La edad del alumno con DNI: $dni es $valor[edad] </p>";
