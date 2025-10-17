@@ -71,6 +71,77 @@
         }
         echo "<br>";
     }
+    ?>
+
+    <h2>Ejercicio 2</h2>
+    <?php
+    
+    $temperaturas = [];
+
+    $ciudades = 6;
+    $dias = 7;
+
+
+    for($i = 0; $i < $ciudades; $i++ ){
+        for($j = 0; $j < $dias; $j++){
+            //Generamos en el array de forma aleatoria las temperaturas
+            $temperaturas[$i][$j] = rand(-10, 45);
+        }
+    }
+
+    //La temperatura más baja y la más alta
+    // de todos los dias y de todas las ciudades
+    $tempMax = 0;
+    $tempMin = 0;
+
+    foreach($temperaturas as $ciudades => $dias){
+        foreach($dias as $temperatura){   //temperatura son los valores CIUDADO CON PONERLO CON S que es el nombnre del array
+            if($temperatura < $tempMin){
+                $tempMin = $temperatura;
+            }
+            if ($temperatura > $tempMax){
+                $tempMax = $temperatura;
+            }
+        }
+    }
+
+    echo "Temperatura mínima " . $tempMin . "<br>" . "Temperatura máxima " . $tempMax;
+    echo "<br>";
+
+    //El día con mayor variación (la resta entre las dos temperaturas)
+    //Aqui tengo que calcular el máximo y el mínimo de cada ciudad y  mostras la ciudad 
+    //con mayor variación
+
+    $variacion = 0;
+
+    foreach($temperaturas as $ciudades => $dia){
+        $min = 0;
+        $max = 0;
+        foreach($dias as $temperatura){
+            //sacar la temeperatura minima
+            if($temperatura < $min){
+                $min = $temperatura;
+            }
+
+            //sacar la temperatura máxima
+            if($temperatura > $max){
+                $max = $temperatura;
+            }
+            
+            $resta = $max - $min;
+        }
+        if ($resta > $variacion){
+            $variacion = $resta;
+        }
+       
+    }
+
+    echo "La variación es de: " .  $variacion . "º.";
+
+
+
+    
+
 
 
 
