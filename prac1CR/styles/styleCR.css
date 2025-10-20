@@ -1,0 +1,42 @@
+
+
+table, td, th {
+    border: 2.5px solid;
+    width: 60%;
+    border-radius: 3%;
+    border-spacing: 5px;
+    padding: 5px;
+    background-color: rgb(138, 214, 212);
+}
+
+td, th {
+    border-color: rgb(0, 0, 0);
+    background-color: azure;
+    width: 70px;
+    height: 50px;
+    text-align: center;
+}
+
+/* Tabla del ejericicio 4  */
+
+.verde {
+    background-color: rgb(86, 210, 86);
+    font-weight: bold;
+    
+}
+
+.amarillo {
+    background-color: rgb(228, 228, 49);
+    font-weight: bold;
+}
+
+.rojo2 {
+    background-color: rgb(203, 27, 27);
+    font-weight: bold;
+}
+
+/* Ejercicio 4.1 */
+.precioTachado {
+    text-decoration: line-through;
+}
+
