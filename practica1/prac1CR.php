@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Práctica 1</title>
+    <link rel="stylesheet" href="style/styleCR.css">
 </head>
 <body>
     <h2>Ejercicio 1: Bucles anidados</h2>
@@ -20,7 +21,6 @@
         }
         echo "<br>";
     }
-
 
 
     /*Segunda figura (triángulo izquierdo)*/
@@ -118,7 +118,7 @@
         $min = 0;
         $max = 0;
         foreach($dias as $temperatura){
-            //sacar la temeperatura minima
+            //sacar la temperatura minima
             if($temperatura < $min){
                 $min = $temperatura;
             }
@@ -135,17 +135,75 @@
         }
        
     }
-
     echo "La variación es de: " .  $variacion . "º.";
+    echo "<br>";
+
+    //Temperatura media por ciudad
+
+    foreach ($temperaturas as $numeroCiudad => $temperaturaCiudad) {
+        $suma = 0;
+        foreach ($temperaturaCiudad as $temperatura) {
+            $suma += $temperatura;
+        }
+
+        $media = $suma / 7; // número de días que ya se ha definido arriba (que son 7)
+        echo "Ciudad " . ($numeroCiudad + 1) . ": " . round($media, 2) . "º<br>";
+                            // numero de la ciudad que va aumentando uno para que se muestren diferentes ciudades
+                            //round($media, 2) lo que hace es que el resultado al tener decimales me lo redondea con 2 decimales
+    }
+    ?>
 
 
+    <?php
+    include("./functions/functionsCR.php");
+    ?>
 
-    
+    <h2>Ejercicio 3</h2>
+    <?php
+    //Ejemplo de uso de las funciones
+
+    echo "<h4>Función filterByType</h4>";
+
+    $numeros = [-5, -2, 0, 1, 2, 3, 4, 5, 11, 13];
+
+    echo "Números pares: ";
+    echo filterByType($numeros, "par");
+    echo "Números impares: ";
+    echo filterByType($numeros, "impar");
+    echo "Números positivos: ";
+    echo filterByType($numeros, "positivo");
+    echo "Números negativos: ";
+    echo filterByType($numeros, "negativo");
+    echo "<br>";
+
+
+    echo "<h4>Función convertTemperature</h4>";
+    echo convertTemperature(100); 
+    echo "<br>";
+    echo convertTemperature(32, 'fahrenheit', 'celsius'); 
+    echo "<br>";
+    echo convertTemperature(0, 'celsius', 'kelvin'); 
+    echo "<br>";
+    echo convertTemperature(100, 'unknown', 'celsius'); 
+    echo "<br>";
+
 
 
 
 
     ?>
+
+
+
+
+
+
+
+
+
+
+
+
 
     
 </body>
