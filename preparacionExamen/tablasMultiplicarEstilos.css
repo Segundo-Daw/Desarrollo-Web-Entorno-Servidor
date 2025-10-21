@@ -1,0 +1,30 @@
+table{
+    background-color: rgb(240, 227, 206);
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+    border-spacing: 5px;
+}
+
+td{
+    padding: 10px;
+
+}
+
+th{
+    padding: 10px;
+
+}
+
+.thx{
+    background-color: aqua;
+}
+
+.thnumber{
+    background-color: rgb(5, 67, 5);
+}
+
+.tdnumber{
+    background-color: rgb(136, 186, 136);
+    
+}
