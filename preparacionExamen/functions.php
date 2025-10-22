@@ -1,5 +1,27 @@
 
 <?php
+// crear un array bidimensional
+
+function crearArrayBidimensional($filas, $columnas) {
+    $array = [];
+    $valor = 1;
+
+    for ($i = 0; $i < $filas; $i++) {
+        for ($j = 0; $j < $columnas; $j++) {
+            $array[$i][$j] = $valor;
+            $valor++;
+        }
+    }
+
+    return $array;
+}
+
+// Ejemplo de uso:
+$matriz = crearArrayBidimensional(3, 4);
+print_r($matriz);
+
+
+
 
 //Para imprimir el contenido de un array bidimensional
 function imprimeBid($array){

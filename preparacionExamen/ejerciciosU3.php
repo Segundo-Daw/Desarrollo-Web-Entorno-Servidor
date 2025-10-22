@@ -667,6 +667,34 @@
 
 
 
+    <h2>crear un array bidimensioanll y mostrarlo</h2>
+    <?php
+    // Crear un array bidimensional de 4 filas y 5 columnas
+        $filas = 4;
+        $columnas = 5;
+        $valor = 1; // Valor inicial
+
+        // Crear el array
+        $matriz = [];
+        for ($i = 0; $i < $filas; $i++) {
+            for ($j = 0; $j < $columnas; $j++) {
+                $matriz[$i][$j] = $valor;
+                $valor++;
+            }
+        }
+        //mostrarlo
+        for ($i = 0; $i < $filas; $i++) {
+        echo "<tr>";
+        for ($j = 0; $j < $columnas; $j++) {
+            echo "<td>" . $matriz[$i][$j] . "</td>";
+        }
+        echo "</tr>";
+}
+
+
+    ?>
+
+
 
 </body>
 </html>

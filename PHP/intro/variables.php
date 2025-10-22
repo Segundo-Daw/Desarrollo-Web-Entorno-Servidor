@@ -64,7 +64,7 @@
 
 
 
-        // Si el ++$x esta a la izquiera lo que indica es que primero se increnta y luego se le da valoer a la y
+        // Si el ++$x esta a la izquiera lo que indica es que primero se increnta y luego se le da valoer a la i
         // es decir, al tener el ++ primero la x pasaria a valer 6 porque se le suma y después se le daria el vvalor
         // de x a la y , por eso en este caso la y también vale 6.
         $x = 5;
