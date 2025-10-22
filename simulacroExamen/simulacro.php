@@ -97,13 +97,11 @@ include("./funcionesXY.php");
     Desde ex1evalXY.php llama a la función e imprime los resultados de potencia(4, 3), que da
     64; potencia(4), que da 16; y potencia(2,8), que da 256</p>
     <?php
-    
 
+    var_dump(potencia(4, 3));
+    var_dump(potencia(4));
+    var_dump(potencia(2, 8));
 
-
-
-    
-    
     ?>
 
     <h3>Ejercicio 5</h3>
@@ -158,26 +156,39 @@ include("./funcionesXY.php");
         ]
     ];
 
-    // Imprime por pantalla en un párrafo (p) la edad de la alumna que tiene DNI 2345X. El resultado es
-    echo "<p>"($alumnado["2345X"]["edad"]). "</p>";
+    echo "<h4>6.a)</h4>";
+    //Imprime por pantalla en un párrafo (p) la edad de la alumna que tiene DNI 2345X.
+    echo "<p>" . $alumnado["2345X"]["edad"] . "</p>";
 
-    //otra forma de hacerlo recorriendo array
-    foreach($alumnado as $dni => $valor){
-         if($dni == "2345X"){
-            echo "<p>La edad del alumno con DNI: $dni es $valor[edad] </p>";
-         }
+    echo "<h4>6.b)</h4>";
+    echo "<ol>";
+    foreach ($alumnado as $dni => $alumno) {
+        echo "<li>" . $alumno["name"];
+        if ($alumno["matricula"]) {
+            echo " sí";
+        } else {
+            echo " no";
+        }
+        //echo $alumno["matricula"] ? " sí" : " no";
+        echo " tiene matrícula.</li>";
     }
+    echo "</ol>";
 
-    /* Imprime por pantalla en una lista ordenada (ol) los nombres y si tiene o
-    no matrícula de todos los elementos de $alumnado. El resultado debe ser
-    exactamente igual al siguiente: */
-    foreach($alumnado as $dni => $valor){
-        $matricula = $valor["matricula"] ? "si" : "no";
-        echo "<ol><li>$valor[nombre] $matricula tiene matrícula</li></ol>";
-
-
-
+    echo "<h4>6.c)</h4>";
+    echo "<ul>";
+    foreach ($alumnado as $dni => $alumno) {
+        if ($alumno["edad"] >= 18) {
+            echo "<li>" . $alumno["name"]
+                . " tiene " . $alumno["edad"] . " años"
+                . " y su DNI es " . $dni . "</li>";
+        }
     }
+    echo "</ul>";
+
+    echo "<code>";
+    echo ord('S') - ord('A') + 1; //ord('S') devuelve el código ASCII del carácter 'S' (que es 83). ord('A') devuelve el código ASCII de 'A' (que es 65).
+    echo "</code>";
+
 
 
 

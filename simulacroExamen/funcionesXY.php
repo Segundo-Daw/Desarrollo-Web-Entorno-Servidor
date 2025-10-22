@@ -2,29 +2,27 @@
 <?php
 
 // Declaramos la función promedio
-function promedio(...$numeros) {   // al poner los ... indicamos que son infinitos números
 
-    // Verificamos si se han introducido números
-    if (count($numeros) === 0) {
+function promedio(...$numeros)
+{
+    if (count($numeros) == 0) {
         return false;
     }
-    // Calculamos la suma de todos los valores
-    $suma = array_sum($numeros);
-
-    // Calculamos el promedio
+    $suma = 0;
+    for ($i = 0; $i < count($numeros); $i++) {
+        $suma += $numeros[$i];
+    }
     return $suma / count($numeros);
 }
 
-function potencia($base, $exponente=2) {
-    foreach($exponente as $mult => $cantidad){
-        
+function potencia($base, $exponente = 2)
+{
+    $resultado = 1;
+    for ($i = 0; $i < $exponente; $i++) {
+        $resultado *= $base;
     }
-
-
-
+    return $resultado;
 }
-
-
 
 
 

@@ -325,6 +325,54 @@
     $puntos = 0;
   
     $keys = array_keys($cartas);
+    //generamos 10 cartas aleatorias
+    for($i = 0; $i < 10; $i++){
+        //indicamos menos uno para que no me genere uno más, sino que solo haga 4 porque empieza en la posición 0. 
+        $p = random_int(0, count($palos) -1 );  
+        $c = random_int(0, count($cartas) -1);
+
+        $nombreCarta = $keys[$c];
+        $valorCarta = $cartas[$nombreCarta];
+        $palo = $palos[$p];
+        $puntos += $valorCarta;
+        echo"<ul>";
+        echo "<li> La carta : $nombreCarta , es del palo $palo .</li>";
+        echo"</ul>";
+    }
+    echo "<ul><li>El total de puntos sumando los valores de las 10 cartas son $puntos.</li></ul>";
+
+    echo"<br>";
+    ?>
+
+    <h2>Ejercicio 10</h2>
+    <?php
+    /*
+    Modifica el juego anterior para asegurarte de que no se repite ninguna carta, igual que si las hubieras cogido de una baraja de verdad.
+    */
+    $palos = [
+        "Oros",
+        "Bastos",
+        "Espadas",
+        "Copas"
+    ];
+
+    $cartas = [
+        "As" => 11,
+        "Dos" => 0,
+        "Tres" => 10,
+        "Cuatro" => 0, 
+        "Cinco" => 0,
+        "Seis" => 0,
+        "Siete" => 0,
+        "Sota" => 2,
+        "Caballo" => 3,
+        "Rey" => 4
+    ];
+
+    $puntos = 0;
+    $keys = array_keys($cartas);
+    $cartasUsadas = [];
+
 
 
     //generamos 10 cartas aleatorias
@@ -334,16 +382,287 @@
         $c = random_int(0, count($cartas) -1);
 
         $nombreCarta = $keys[$c];
-        $valorCarta = $cartas[$nombreCarta];
-        
+        $palo = $palos[$p];
+        $cartaUnica = $nombreCarta;
+
+        if(in_array($cartaUnica,$cartasUsadas )){
+            $i--;
+        }else{
+            $cartasUsadas[] = $cartaUnica;
+            $valorCarta = $cartas[$nombreCarta];
+            $puntos += $valorCarta;
+
+            echo"<ul>";
+            echo "<li> La carta : $cartaUnica , es del palo $palo .</li>";
+            echo"</ul>";
+        }
+    
+    }
+    echo "<ul><li>El total de puntos sumando los valores de las 10 cartas son $puntos.</li></ul>";
+    ?>
+
+
+    <h2>Ejercicio 11</h2>
+    <?php
+    /*
+    Crea un minidiccionario castellano-inglés que contenga, al menos, 10 palabras (con su traducción). Utiliza un array asociativo para guardar las parejas de palabras. A continuación, muestra aleatoriamente (rand()) una palabra en castellano y su traducción al inglés.
+    */
+
+    $diccionario = [
+        "coche" => "car",
+        "flor" => "flower",
+        "gato" => "cat",
+        "perro" => "dog",
+        "portatil" => "laptop",
+        "ordenador" => "computer",
+        "calculadora" => "calculator",
+        "moto" => "motorbike",
+        "lapiz" => "pencil",
+        "escritorio" => "desk"
+    ];
+
+    foreach($diccionario as $esp => $ingles){
+        $palabras = array_keys($diccionario);
+
+        $aleatorio = rand(0, count($diccionario));
+        $palabraEspanol = $palabras[$aleatorio];
+        $palabraIngles = $diccionario[$palabraEspanol];
+    }
+
+    echo "<p>La palabra en español $palabraEspanol en ingles es $palabraIngles.</p>";
+    ?>
+
+    <h2>Ejercicio12</h2>
+    <?php
+    /*
+    Crea un array bidimensional de 10 filas y 10 columnas y rellénalos con números aleatorios entre 0 y 500. Asegúrate de que ningún número se repite. Imprime el contenido del array bidimensional en una <table>.
+    */
+
+
+    //Creamos el array con todos los número del 0 al 500 y despues usamos el suffle para que no vayan en orden
+    $numerosDisponibles = range(0,500);
+    shuffle($numerosDisponibles);
+
+    //Como van a ser 10 filas con 10 columnas vamos a coger de sas 500 opciones solo 100 (10x10)
+    //array_slice hace que no se repitan lo números
+    $numerosSeleccionados = array_slice($numerosDisponibles, 0, 100);
+
+    // Crear array bidimensional 10x10 y rellenar con esos números
+    $matriz = [];
+    $contador = 0;
+    for ($i= 0; $i < 10; $i++) {            //mi $i son las filas
+        for ($j = 0; $j < 10; $j++) {       // mi $j son las columnas
+            $matriz[$i][$j] = $numerosSeleccionados[$contador];
+            $contador++;
+        }
+    }
+
+    echo "<table border='1' cellpadding='5' cellspacing=''>";
+    for ($i = 0; $i < 10; $i++) {
+        echo "<tr>";
+        for ($j = 0; $j < 10; $j++) {
+            echo "<td>" . $matriz[$i][$j] . "</td>";
+        }
+        echo "</tr>";
+    }
+
+    echo "</table>";
+
+    ?>
+
+    <h2>Ejercicio 13</h2>
+    <?php
+    /*
+    Dado el array que hay a continuación, haz e imprime los resultados de las siguientes operaciones:
+        1. Calcular el promedio de cada estudiante y agregarlo al array.
+        2. Encontrar a le estudiante con el promedio más alto
+        3. Contar cuántes estudiantes aprobaron cada materia (nota >= 7)
+        4. Crear un array con la nota máxima por materia
+        5. Ordenar estudiantes por promedio de forma descendente
+
+    */
+
+    $estudiantes = [
+        ["nombre" => "Ana García", "matematicas" => 8.5, "historia" => 7.0, "programacion" => 9.0],
+        ["nombre" => "Luis Martínez", "matematicas" => 6.0, "historia" => 8.5, "programacion" => 7.5],
+        ["nombre" => "Marta Rodríguez", "matematicas" => 9.0, "historia" => 6.5, "programacion" => 8.0],
+        ["nombre" => "Carlos López", "matematicas" => 7.5, "historia" => 9.0, "programacion" => 6.5],
+        ["nombre" => "Elena Torres", "matematicas" => 8.0, "historia" => 7.5, "programacion" => 9.5]
+    ];
+
+    /*1. Calcular el promedio de cada estudiante y agragarlo al array */
+    //En el foreach ponemos en esta caso el & porque es una forma de agregarlo en el array el nuevo elemento de forma permanente
+    foreach ($estudiantes as &$estudiante) {
+        $promedio = ($estudiante["matematicas"] + $estudiante["historia"] + $estudiante["programacion"]) /3;
+        /*Agregamos un nuevo elemento al array aosciativo con la clave "promedio" */
+        $estudiante["promedio"] = round($promedio, 2); /*el round redondea el valor y al poner el 1 hace que lo redondee a un decimal)   */
+    }
+    //Imprimir los resultados 
+    foreach($estudiantes as $estudiante) {
+        echo "Nombre: " . $estudiante["nombre"] . "<br>";
+        echo "Matemáticas: " . $estudiante["matematicas"] . "<br>";
+        echo "Historia: " . $estudiante["historia"] . "<br>";
+        echo "Programación: " . $estudiante["programacion"] . "<br>";
+        echo "Promedio: " . $estudiante["promedio"] . "<br>";
+        echo "<br><br>";
     }
 
 
+    /*2.Encontrar a le estudiante con el promedio más alto */
+    //Vamos a asumir que el primero es el mejor para empezar a comparar
+    $mejorEstudiante = $estudiantes[0];
 
+    foreach($estudiantes as &$estudiante) {
+        if ($estudiante["promedio"] > $mejorEstudiante ["promedio"] ){
+            $mejorEstudiante = $estudiante;
+        } 
+    }
+    //Mostramos el resultado
+    echo "EL estudiante con el promedio más alto es " . $mejorEstudiante["nombre"] . "<br>";
+    echo "Su promedio es: " . $mejorEstudiante["promedio"] . "<br>";
+
+
+
+    /*3. Contar cuántes estudiantes aprobaron cada materia (nota >= 7)*/
+    $count = 0;
+    
+    // Recorremos con un for tradicional
+    for ($i = 0; $i < count($estudiantes); $i++) {
+        if ($estudiantes[$i]["matematicas"] >= 7) {
+            if ($estudiantes[$i]["historia"] >= 7){
+                if ($estudiantes[$i]["programacion"] >= 7){
+                    $count++;
+                    
+                }
+            }
+        }
+    }
     
 
+    echo "El número de estudiantes que han aprobado todas las asignaturas con un 7 o más son:" . $count . "<br>";
+
+    /*4. Crear un array con la nota máxima por materia   */
+    $notaMaxima = [];
+    $maxH = 0;
+    $maxM = 0;
+    $maxP = 0;
+
+    for ($i = 0; $i < count($estudiantes); $i++) {
+        if ($estudiantes[$i]["matematicas"] > $maxM){
+            $maxM = $estudiantes[$i]["matematicas"];
+        }
+        if ($estudiantes[$i]["historia"] > $maxH){
+            $maxH = $estudiantes[$i]["historia"];
+        }
+        if ($estudiantes[$i]["programacion"] > $maxP){
+            $maxP = $estudiantes[$i]["programacion"];
+        }
+
+        $notaMaxima ["matematicas"] = round($maxM);
+        $notaMaxima["historia"] = round($maxH);
+        $notaMaxima["programacion"] = round($maxP);
+    }
+
+    echo "La nota máxima de matemáticas es un " . $notaMaxima["matematicas"] . " ,la de historia es un " .  $notaMaxima["historia"] . " , y la de programación es un  " . $notaMaxima["programacion"] . "<br>";
+    echo "<br>";
+
+    /*5. Ordenar estudiantes por promedio de forma descendente   */
+
+    // Usamos usort con una función de comparación
+    usort($estudiantes, function($a, $b) {
+        return $b["promedio"] <=> $a["promedio"]; // Descendente
+    });
+
+    // Mostrar resultados
+    echo "Estudiantes ordenados por promedio (descendente):<br>";
+    foreach ($estudiantes as $estudiante) {
+        echo $estudiante["nombre"] . " - Promedio: " . $estudiante["promedio"] . "<br>";
+    }
+    ?>
 
 
+    <h3>Ejercicio 14</h3>
+    <?php
+    /*
+    Dado el siguiente array, haz:
+
+        1. Mostrar habitaciones disponibles de un tipo específico ($tipo = "individual", por ejemplo).
+        2. Calcular ingresos totales del hotel
+        3. Reservar una habitación
+        4. Liberar una habitación y calcular el costo
+        5. Encontrar la habitación más rentable (que más ingresos genera)
+    */
+    $hotel = [
+        "habitaciones" => [
+            101 => ["tipo" => "individual", "precio" => 50, "ocupada" => false, "dias_ocupada" => 0],
+            102 => ["tipo" => "doble", "precio" => 80, "ocupada" => true, "dias_ocupada" => 3],
+            103 => ["tipo" => "suite", "precio" => 150, "ocupada" => false, "dias_ocupada" => 0],
+            201 => ["tipo" => "individual", "precio" => 50, "ocupada" => true, "dias_ocupada" => 5],
+            202 => ["tipo" => "doble", "precio" => 80, "ocupada" => false, "dias_ocupada" => 0],
+            203 => ["tipo" => "suite", "precio" => 150, "ocupada" => true, "dias_ocupada" => 2]
+            ],
+        "reservas" => [
+            ["habitacion" => 102, "cliente" => "Juan Pérez", "dias" => 3],
+            ["habitacion" => 201, "cliente" => "María López", "dias" => 5],
+            ["habitacion" => 203, "cliente" => "Carlos Ruiz", "dias" => 2]
+        ]
+    ];
+
+    /*1. Mostrar habitaciones disponibles de un tipo específico*/
+    foreach($hotel["habitaciones"] as $numHabitacion => $habitacion){
+        if($habitacion ["tipo"] == "individual" && $habitacion["ocupada"] == false){
+            echo "<br>La habitación $numHabitacion está disponible";
+        }
+    }
+
+    /* 2. Calcular ingresos totales del hotel  */
+    $ingresos = 0;
+
+    foreach($hotel["habitaciones"] as $numHabitacion => $habitacion){
+        $ingresos += $habitacion ["precio"];
+    }
+    echo "<br> Los ingresos totales son : $ingresos €.";
+    ?>
+
+    <h2>Ejercicio 15</h2>
+    <?php
+    /*
+    Crea un array bidimensional indexado de 10 filas y 10 columnas.
+    Después de crearlo, imprímelo en una tabla de manera que las celdas de las diagonales tengan el fondo rojo, y la central azul (con clases, puedes utilizar style dentro del propio documento).
+    */
+
+    // Crear array bidimensional 10x10 con valores ejemplo (puede ser cualquier cosa)
+    $array = [];
+    for ($i = 0; $i < 10; $i++) {
+        for ($j = 0; $j < 10; $j++) {
+            $array[$i][$j] = $i * 10 + $j + 1; // números del 1 al 100
+        }
+    }
+
+    echo "<table>";
+    for ($i = 0; $i < 10; $i++) {
+    echo "<tr>";
+    for ($j = 0; $j < 10; $j++) {
+        // Determinar si es celda diagonal principal o secundaria
+        $esDiagonal = ($i == $j) || ($i + $j == 9);
+
+        // Determinar si es la celda central (fila 5, columna 5; índices 0-9)
+        $esCentral = ($i == 4 && $j == 4);
+
+        // Asignar clase según condición
+        $clase = "";
+        if ($esCentral) {
+            $clase = "central";
+        } elseif ($esDiagonal) {
+            $clase = "diagonal";
+        }
+
+        echo "<td class='$clase'>{$array[$i][$j]}</td>";
+    }
+    echo "</tr>";
+    }    
+
+    echo "</table>";
     ?>
 
 
