@@ -114,7 +114,7 @@
        $a = $numero[$i]**2;
        $cuadrado [] = $a;
     }
-    echo "<p>" .implode(" , " , $cuadrado)."</p>";
+    echo "<p>" .implode(" , " , $cuadrado)."</p>";  
 
     for ($i = 0; $i < count ($numero);$i++){
         $b = $numero[$i]**3;
@@ -223,16 +223,19 @@
     ];
 
     $puntos = 0;
-    $jugada = [];
-    $cartasUsadas = [];
+
     $keys = array_keys($cartas);
 
     for ($i = 0; $i < 10; $i++){
         $p = random_int(0, count ($palos) -1);    // se le pone -1 para que el random no me genere otro número más sino que vaya del 0 al 3 que son las 4 opciones de palos que tengo
         $c = random_int(0, count ($cartas) -1); 
+
         $nombreCarta = $keys[$c];   // Ej: "As" Muestra el nombre de la carta conviertiendose en otro array con sus valores
+        
         $valorCarta = $cartas[$nombreCarta]; // Ej: "11" Muestra el valor del array que hemos creado anteiormente, es decir, nos da el numero del array cartas
+        
         $palo = $palos[$p]; //  Ej: "copas" muestra los palos (1º array creado)
+        
         $puntos += $valorCarta; // pues te suma los puntos de las 10 cartas que salen al azar
 
         echo "<ul><li>";
@@ -546,23 +549,6 @@
 
 
     ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
     
 </body>
 </html>
