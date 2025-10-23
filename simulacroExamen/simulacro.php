@@ -189,10 +189,6 @@ include("./funcionesXY.php");
     echo ord('S') - ord('A') + 1; //ord('S') devuelve el código ASCII del carácter 'S' (que es 83). ord('A') devuelve el código ASCII de 'A' (que es 65).
     echo "</code>";
 
-
-
-
-
     ?>
 
 
