@@ -17,13 +17,14 @@ include("functions/functionsCR.php");
 
         for ($i = 0; $i < $filas; $i++) {
             for ($j = 0; $j < $columnas; $j++) {
-                if(($filas * $columnas) % 3 == 0){
-                    echo $posiciones[$filas][$columnas] = "multiplo";
+                if($i % 3 == 0 || $j %3 ==0){
+                    echo $posiciones[$filas][$columnas] = " multiplo ,";
                 }else{
-                    echo $posiciones[$filas][$columnas] = "no";
+                    echo $posiciones[$filas][$columnas] = " no ,";
 
                 }
             }
+            echo"<br>";
         }
     ?>
 
