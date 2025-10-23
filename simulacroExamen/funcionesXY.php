@@ -8,6 +8,7 @@ function promedio(...$numeros)
     if (count($numeros) == 0) {
         return false;
     }
+    
     $suma = 0;
     for ($i = 0; $i < count($numeros); $i++) {
         $suma += $numeros[$i];
