@@ -5,11 +5,14 @@ class Minotauro{
     //Se pueden crear atributos extra si queremos (es un poco raro)
     private float $percentage;
 
+    //Los atributos tambien pueden ser objetos de otras clases
+    private Cat $pet; 
+
     //Los atributos están declarados dentro del constructor
-    public function __construct(
-        private string $name, 
-        private int $age = -1
-    ){}
+        public function __construct(
+                private string $name, 
+                private int $age = -1
+        ){}
         public function getName()
         {
                 return $this->name;
@@ -37,7 +40,23 @@ class Minotauro{
                 return $this;
         }
 
+        public function getPet()
+        {
+                return $this->pet;
+        }
+
+   
+        public function setPet($pet)
+        {
+                $this->pet = $pet;
+
+                return $this;
+        }
+
         public function __tostring(){
             return $this->name . " tiene " . $this->age . "años";
         }
+
+    
+    
 }
