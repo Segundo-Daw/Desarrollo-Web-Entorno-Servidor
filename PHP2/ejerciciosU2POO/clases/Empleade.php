@@ -4,11 +4,14 @@ class Empleade{
     private String $nombre;
     private String $apellidos;
     private float $sueldo = -1; // al poner -1 indicamos que su no recibe sueldo sale -1
+    private array $telefonos;
 
-    public function __construct($nombre, $apellidos, $sueldo = -1){
+    public function __construct($nombre, $apellidos, $telefonos, $sueldo = -1){
         $this -> nombre =  $nombre;
         $this -> apellidos = $apellidos;
+        $this -> telefonos  = $telefonos;
         $this -> sueldo = $sueldo;
+        
     }
 
     
@@ -44,8 +47,18 @@ class Empleade{
         return $this;
     }
 
+    public function getTelefonos(){
+        return $this->telefonos;
+    }
+
+    public function setTelefono($telefonos){
+        $this->telefonos = $telefonos;
+
+        return $this;
+    }
+
     public function __toString(){
-        $ret = "- Nombre: " .  $this->nombre . " - Apellido: " . $this->apellidos . " - Sueldo: " . $this->sueldo;
+        $ret = "| DATOS |" .  " - Nombre: " .  $this->nombre .  " - Apellido: " . $this->apellidos . " - Sueldo: " . $this->sueldo;
         return $ret;
     }
 
@@ -64,50 +77,57 @@ class Empleade{
 
         $sueldo = $this->sueldo;
 
-        if ($sueldo >= 0 && $sueldo <=12450){
-            $sueldo *= 0.19;
-            return $sueldo;
-        }else if ($sueldo > 12450 && $sueldo <= 20199){
-            $primerTramo = $sueldo - 12450;
-            $restoPrimerTramo = 12450 * 0.19;
-            $restoSegundoTramo = $primerTramo * 0.24;
-            $sueldoTotal = $restoPrimerTramo + $restoSegundoTramo;
-            return $sueldoTotal;
-        }else if($sueldo >= 20200){
-            $primerTramo = $sueldo -12450;
-            $restoPrimerTramo = 12450 * 0.19;
-            if($primerTramo > 12450){
-                $primerTramo *= 0.24;
-                $sueldoFinal = $primerTramo + $restoPrimerTramo;
-                return $sueldoFinal;
-            }else if($primerTramo < 12450){
-                $primerTramo*=0.19;
-                $sueldoFinal = $primerTramo + $restoPrimerTramo;
-                return $sueldoFinal;
-            }
-        }else if ($sueldo >= 35200){
-            $primerTramo = $sueldo -12450;
-            $restoPrimerTramo = 12450 * 0.19;
-            if($primerTramo > 20200){
-                $primerTramo *= 0.30;
-                $sueldoFinal = $primerTramo + $restoPrimerTramo;
-                return $sueldoFinal;
-            }else if($primerTramo < 20200){
-                if($primerTramo > 12450){
-                    $primerTramo *= 0.24;
-                    $sueldoFinal = $primerTramo + $restoPrimerTramo;
-                    return $sueldoFinal;
-                }else if($primerTramo < 12450){
-                    $primerTramo*=0.19;
-                    $sueldoFinal = $primerTramo + $restoPrimerTramo;
-                    return $primerTramo;
-                }
-            }
+        $total = 0;
+        
+        if ($sueldo <= 12450) {
+            $total = $sueldo * 0.19;
+        } else if ($sueldo <= 20200) {
+            $total = 12450 * 0.19 + ($sueldo - 12450) * 0.24;
+        } else if ($sueldo <= 35200) {
+            $total = 12450 * 0.19 + (20200 - 12450) * 0.24 + ($sueldo - 20200) * 0.30;
+        } else {
+            $total = 12450 * 0.19 + (20200 - 12450) * 0.24 + (35200 - 20200) * 0.30 + ($sueldo - 35200) * 0.37;
         }
+
+        return $total;
+
     }
 
 
+    public function anadirTelefono(string $telefono){
+        $this->telefonos[] = $telefono;
+    }
+
+    // Mostrar los teléfonos
+    public function mostrarTelefonos(){
+        return $this->telefonos;
+    }
+
+    //listar todos los telefonos separados por comas
+    public function listarTelefonos(){
+        return implode($this->telefonos);  //con el implode se une todos los elementos del array
+    }
+
+    //Elimina todos los teléfonos del array
+    public function vaciarTelefonos(){
+        $this->telefonos = [];
+    }
+
+    //devuelve en un párrafo los datos de le empleade (nombre, apellidos, sueldo e impuestos), y a continuación dentro de una lista desordenada (<ul>) los números de teléfono (si tiene).
+
+    public function toHtml(){
+        $res = "<p>Nombre: " . $this->nombre . "Apellido" . $this->apellidos . "Sueldo: " . $this->sueldo;
+        return $res;
+    }
+
+
+    
 
 
 
+
+
+
+    
+    
 }
