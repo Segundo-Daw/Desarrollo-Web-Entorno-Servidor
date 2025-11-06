@@ -116,9 +116,13 @@ class Empleade{
     //devuelve en un párrafo los datos de le empleade (nombre, apellidos, sueldo e impuestos), y a continuación dentro de una lista desordenada (<ul>) los números de teléfono (si tiene).
 
     public function toHtml(){
-        $res = "<p>Nombre: " . $this->nombre . "Apellido" . $this->apellidos . "Sueldo: " . $this->sueldo;
-        return $res;
+        $impuesto = $this->pagarImpuestos();
+        $res = "<p>Nombre: " . $this->nombre . "Apellido" . $this->apellidos . "Sueldo: " . $this->sueldo . "Impuesto: " . $impuesto;
+
+
+        //falta terminar
     }
+
 
 
     
