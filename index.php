@@ -20,7 +20,8 @@
     for ($i = 0; $i < count($arr); $i++){
         $suma += $arr [$i];
     }
-    echo "$a + $b";
+    incrementa ($b);
+    echo "$a y $b";
 
     function incrementa ($a){
         $a++;
