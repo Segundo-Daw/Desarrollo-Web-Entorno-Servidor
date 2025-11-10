@@ -15,8 +15,7 @@
         include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Mascota.php";
         include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Servicio.php";
         include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Usuario.php";
-        include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Usuario.php";
-        include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Usuario.php";
+
 
 
         // Crear hotel
