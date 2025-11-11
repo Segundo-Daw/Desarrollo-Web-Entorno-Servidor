@@ -9,13 +9,13 @@
 <body>
     <?php
 
-        include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Ave.php";
-        include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Perro.php";
-        include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Gato.php";
-        include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Hotel.php";
-        include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Mascota.php";
-        include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Servicio.php";
-        include $_SERVER["DOCUMENT_ROOT"] . "/POO_CarolinaRuescas/app/models/Usuario.php";
+        require $_SERVER["DOCUMENT_ROOT"] . "/app/models/Ave.php";
+        require $_SERVER["DOCUMENT_ROOT"] . "/app/models/Perro.php";
+        require $_SERVER["DOCUMENT_ROOT"] . "/app/models/Gato.php";
+        require $_SERVER["DOCUMENT_ROOT"] . "/app/models/Hotel.php";
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
+        require $_SERVER["DOCUMENT_ROOT"] . "/app/models/Servicio.php";
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Usuario.php";
 
 
 
@@ -39,8 +39,13 @@
         // Añadir usuarios al hotel
         $hotel->agregarUsuario($usuario1);
         $hotel->agregarUsuario($usuario2);
-
         ?>
+
+        <div class="header">
+            <h2>Hotel para Mascotas Ruescas</h2>
+
+        </div>
+
 
         <!-- Información del hotel -->
         <div class="hotel">
@@ -48,26 +53,6 @@
             <p class="total-usuarios"><strong>Nombre del hotel:</strong> <?php echo $hotel->getNombre(); ?></p>
             <p class="total-usuarios"><strong>Total de usuarios:</strong> <?php echo count($hotel->getUsuarios()); ?></p>
 
-            <?php foreach($hotel->getUsuarios() as $usuario): ?>
-                <div class="usuario">
-                    <h3>Usuario: <?php echo $usuario->getNameUser(); ?></h3>
-                    <p><strong>Email:</strong> <?php echo $usuario->getEmail(); ?></p>
-                    <p class="total-mascotas"><strong>Total de mascotas:</strong> <?php echo count($usuario->getMascotas()); ?></p>
-
-                    <?php if (!empty($usuario->getMascotas())): ?>
-                        <?php foreach($usuario->getMascotas() as $mascota): ?>
-                            <div class="mascota">
-                                <h4>Nombre: <?php echo $mascota->getName(); ?> (<?php echo $mascota->type; ?>)</h4>
-                                <pre><?php echo $mascota; ?></pre>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <p class="alert alert-warning">Este usuario no tiene mascotas.</p>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
-
-            <p class="ingresos"><strong>Ingresos totales del hotel:</strong> <?php echo $hotel->calcularIngresosTotales(); ?>€</p>
         </div>
 
         <!-- Servicios disponibles -->
@@ -76,32 +61,8 @@
             <pre><?php Servicio::mostrarServiciosDisponibles(); ?></pre>
         </div>
 
-        <!-- Ejemplo de eliminar un servicio de una mascota -->
-        <div class="usuario">
-            <h2>Ejemplo: Eliminar servicio "Paseo" de Rex</h2>
-            <?php 
-                $perro1->eliminarServicio("Paseo"); 
-                $usuario1->mostrarInfo();
-            ?>
-        </div>
 
-        <!-- Ejemplo de eliminar mascota de un usuario -->
-        <div class="usuario">
-            <h2>Ejemplo: Eliminar mascota "Kiwi" de Juan</h2>
-            <?php 
-                $usuario1->eliminarMascota($ave1); 
-                $usuario1->mostrarInfo(); 
-            ?>
-        </div>
-
-        <!-- Ejemplo de eliminar usuario del hotel -->
-        <div class="hotel">
-            <h2>Ejemplo: Eliminar usuario Ana López del hotel</h2>
-            <?php 
-                $hotel->eliminarUsuario($usuario2); 
-                $hotel->mostrarInfoHotel(); 
-            ?>
-        </div>
-    </div>
+        
+    
 </body>
 </html>

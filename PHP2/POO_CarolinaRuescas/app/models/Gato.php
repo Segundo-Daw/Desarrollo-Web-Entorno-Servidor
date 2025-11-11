@@ -1,4 +1,6 @@
 <?php
+require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
+
 final class Gato extends Mascota{
     private String $raza;
     private bool $independiente;
@@ -6,8 +8,8 @@ final class Gato extends Mascota{
 
 
     public function __construct($raza, $independiente, $name, $age, $numberDays, $servicios){
-        $this->raza;
-        $this->independiente;
+        $this->raza = $raza;
+        $this->independiente = $independiente;
         $this->type = "Gato";
         parent:: __construct($name, $age, $numberDays, $servicios);
     }

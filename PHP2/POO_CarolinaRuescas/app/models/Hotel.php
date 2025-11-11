@@ -1,4 +1,6 @@
 <?php
+require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Usuario.php";
+
 
 class Hotel {
     private string $nombre;

@@ -1,4 +1,6 @@
 <?php
+require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
+
 
 final class Ave extends Mascota{
     private String $especie;

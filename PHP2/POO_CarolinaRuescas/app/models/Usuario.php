@@ -1,4 +1,7 @@
 <?php
+require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
+
+
 class Usuario{
     private String $nameUser;
     private String $email;

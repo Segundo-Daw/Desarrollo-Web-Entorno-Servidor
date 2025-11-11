@@ -2,7 +2,7 @@
 
 class Servicio{
     private String $nameService;
-    private int $precio;
+    private float $precio;
 
 
     public function __construct($nameService, $precio){
