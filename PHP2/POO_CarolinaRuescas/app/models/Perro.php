@@ -16,13 +16,23 @@ final class Perro extends Mascota{
 
     public function __toString(){
         $ret = "Raza de perro: {$this->raza}\n";
-        $ret .= "¿Muerde? " . ($this->independiente ? "Sí" : "No") . "\n";     
+        $ret .= "¿Muerde? " . ($this->muerde ? "Sí" : "No") . "\n";     
         $ret .= parent:: __toString();
 
         return $ret;
     }
 
-    
+
+    //He hecho este get de forma manual para poder acceder a la tarifa base sin hacerla publica
+    public static function getTarifaBaseDia(): int {
+        return self::TARIFA_BASE_DIA;
+    }
+
+    //Plus si el perro muerde
+    protected function calcularPlus(): float {
+        return $this->muerde ? 20 : 0;
+    }
+
 
 
 

@@ -37,16 +37,16 @@ class Hotel {
 
     // Método para mostrar información del hotel y sus usuarios
     public function mostrarInfoHotel(){
-        echo "Hotel: {$this->nombre}\n";
+        echo "<p>Hotel: $this->nombre </p>";
         $totalUsuarios = count($this->usuarios);
-        echo "Total de usuarios: {$totalUsuarios}\n";
+        echo "<p>Total de usuarios: $totalUsuarios</p>";
 
         if ($totalUsuarios === 0) {
             echo "- Ningún usuario registrado\n";
         } else {
             foreach ($this->usuarios as $usuario) {
-                echo "\n";
-                echo $usuario; // llama al __toString() de Usuario
+        
+                echo "<p>$usuario</p>"; // llama al __toString() de Usuario
             }
         }
     }
@@ -64,7 +64,7 @@ class Hotel {
             $total += $mascota->calcularPrecioTotal();
         }
     }
-    return $total;
+    return "Ingresos totales: $total  €";
 }
 
 

@@ -35,31 +35,28 @@ abstract class Mascota{
         return $ret;  
     }
 
-    /* 
-    Método para añadir servicios a las mascota
-    He puesto un if para evitar duplicados. 
-     */ 
-
-    public function anadirServicio(string $servicio){
-        if (!in_array($servicio, $this->servicios)) {
-            $this -> servicios [] = $servicio;
+    // Añadir un servicio, evitando duplicados
+    public function anadirServicio(Servicio $servicio){
+        foreach ($this->servicios as $s) {
+            if ($s->getNameService() === $servicio->getNameService()) {
+                // ya existe, no añadimos
+                return;
+            }
         }
+        $this->servicios[] = $servicio;
     }
 
-    // Método para borrar un servicio asignado a una mascota
-
-    public function eliminarServicio(string $servicio): bool {
-    foreach ($this->servicios as $key => $s) {
-        if ($s === $servicio) { // compara si es exactamente el mismo objeto
-            unset($this->servicios[$key]); //elimina del aray
-            $this->servicios = array_values($this->servicios); //reindexa el array
-            return true;  //lo elimina de forma exitosa
+    // Eliminar un servicio por nombre
+    public function eliminarServicio(string $nombreServicio): bool {
+        foreach ($this->servicios as $key => $s) {
+            if ($s->getNameService() === $nombreServicio) {
+                unset($this->servicios[$key]);
+                $this->servicios = array_values($this->servicios); // reindexa el array
+                return true;
+            }
         }
+        return false;
     }
-    return false;  // no se encontró la mascot
-}
-
-
 
     //Método para mostrar los servicios que hay disponibles
     public function mostrarServiciosDisponibles(){
@@ -68,10 +65,10 @@ abstract class Mascota{
 
     
    // Método para calcular el precio total de los días dependiendo de si tiene servicios contratados o no
-    
+
     public function calcularPrecioTotal(){
          // Accede a la constante de la subclase
-        $tarifaBase = static::TARIFA_BASE_DIA;
+        $tarifaBase = static::getTarifaBaseDia();
         $totalServicios = 0;
 
         // Recorre los servicios contratados por esta mascota
@@ -81,13 +78,56 @@ abstract class Mascota{
                 $totalServicios += $servicio->getPrecio();
             }
         }
-
         // Aplica 20% de descuento si hay 3 o más servicios contratados
         if (count($this->servicios) >= 3) {
          $totalServicios *= 0.8; // equivalente a 20% de descuento (100%-20%)
-         }
-        return ($tarifaBase * $this->numberDays) + $totalServicios;
+        }
+        // Calcula el plus específico de la subclase
+        $plus = $this->calcularPlus();
+        return ($tarifaBase * $this->numberDays) + $totalServicios + $plus;
     }
+
+
+
+
+
+    //Método para mostrar toda la información detallada de cada mascota
+    public function mostrarInfoCompleta(): string {
+        $info = "Nombre: $this->name\n";
+        $info .= "Edad: $this->age años\n";
+        $info .= "Tipo: $this->type \n";
+        $info .= "Número de días: $this->numberDays\n";
+
+        // Mostrar servicios
+        if (!empty($this->servicios)) {
+            $info .= "Servicios contratados:\n";
+            foreach ($this->servicios as $servicio) {
+                    $info .= "  - {$servicio->getNameService()} ({$servicio->getPrecio()}€)\n";
+                }
+            
+            if (count($this->servicios) >= 3) {
+                $info .= "Descuento aplicado por 3 o más servicios: 20%\n";
+            }
+        } else {
+            $info .= "Servicios contratados: Ninguno\n";
+        }
+
+        // Mostrar plus
+        $plus = $this->calcularPlus();
+        $info .= "Plus por características especiales: {$plus}€\n";
+
+        // **Aquí usamos directamente calcularPrecioTotal()**
+        $info .= "PRECIO TOTAL: {$this->calcularPrecioTotal()}€\n";
+
+        return $info;
+    }
+
+
+    
+
+
+
+
 
 
 

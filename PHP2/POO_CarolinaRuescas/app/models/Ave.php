@@ -18,6 +18,18 @@ final class Ave extends Mascota{
         $ret = "Especie de ave: {$this->especie}\n";
         $ret .= "¿Puede hablar? " . ($this->habla ? "Sí" : "No") . "\n";
         $ret .= parent::__toString();
+
+        return $ret;
+    }
+
+    //He hecho este get de forma manual para poder acceder a la tarifa base sin hacerla publica
+    public static function getTarifaBaseDia(): int {
+        return self::TARIFA_BASE_DIA;
+    }
+
+    //Plus si habla
+    protected function calcularPlus(): float {
+        return $this->habla ? 10 : 0; 
     }
 
 

@@ -40,9 +40,7 @@ class Usuario{
     }
 
     public function __toString() {
-        $ret = "Usuario: {$this->nameUser}\n";
-        $ret .= "Email: {$this->email}\n";
-        $ret .= "Total de mascotas: " . count($this->mascotas) . "\n";
+        $ret = "<ul><li>Usuario: $this->nameUser " .  "|  Email: $this->email " .  " | Total de mascotas: " . count($this->mascotas) . "</li></ul>";
 
         return $ret;
     }

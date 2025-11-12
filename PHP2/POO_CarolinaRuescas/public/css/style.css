@@ -1,28 +1,107 @@
+body{
+    background-color: #085347;
+}
 
 .header{
+    background: linear-gradient(-20deg, #553d0c, #d4a611, #735a08, #553d0c);
+    color: white;
     text-align: center;
-    background-color: #115c56;
-    color:  white;
-    border-radius: 30px;
-    height: 60px;
-    margin-bottom: 20px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 10px 10px 15px rgba(146, 129, 0, 0.3);
+    border-bottom-left-radius: 500px;
+    border-bottom-right-radius: 500px;
 }
 
-.hotel {
-    border: solid 4px;
-    border-color: #4a90e2;
+.header h1 {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Contenido */
+.precios {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;  /*permite varias filas si ni caben*/ 
+    gap: 20px;
+    padding: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Cards generales */
+.card-precio {
+    flex: 1;
+    width: 300px;           /* ancho uniforme para todas */
+    text-align: center;
     border-radius: 10px;
-    padding: 25px 20px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+.titulos{
+    justify-content: center;
+    display: flex;
+    background-color: antiquewhite;
+    border-radius: 50px;
     margin-bottom: 20px;
-    background-color: #f0f8ff;
+    margin-top: 20px;
 }
 
 
-.servicio {
-    border: solid 4px;
-    border-color: #e94e77;
-    background-color: #fff0f3;
-    width: 300px;
-    height: 300px;
+
+/* Sección información del hotel*/
+.hotel {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;  /*permite varias filas si ni caben*/ 
+    background-color: #fff9ca;
+    box-sizing: border-box;
+    gap: 20px;
+    padding: 30px;
+    height: 500px;   
+ 
 }
+
+
+.card-hotel, .card-servicio {
+    flex:1;
+    border: dotted 6px #221b03;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #274b425f;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+.mascotas{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;  /*permite varias filas si ni caben*/ 
+    background-color: #fff9ca;
+    box-sizing: border-box;
+    gap: 20px;
+    padding: 30px;
+    height: 9%;
+}
+
+.card-mascota, .card-informacion-mascota {
+    width: 100%;
+    border: dotted 6px #221b03;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #274b425f;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+
+
+
+
+
 

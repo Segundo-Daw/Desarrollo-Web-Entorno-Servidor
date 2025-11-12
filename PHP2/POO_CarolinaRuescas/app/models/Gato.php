@@ -21,5 +21,15 @@ final class Gato extends Mascota{
 
         return $ret;
     }
+
+    //He hecho este get de forma manual para poder acceder a la tarifa base sin hacerla publica
+    public static function getTarifaBaseDia(): int {
+        return self::TARIFA_BASE_DIA;
+    }
+
+    // Por si habla un plus por entrenamiento
+    protected function calcularPlus(): float {
+        return $this->independiente ? 15 : 0; // +15€ si no es independiente
+    }
 }
 ?>
