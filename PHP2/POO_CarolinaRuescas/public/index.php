@@ -39,6 +39,14 @@
         // Añadir usuarios al hotel
         $hotel->agregarUsuario($usuario1);
         $hotel->agregarUsuario($usuario2);
+
+
+        $hotel = $hotel->mostrarInfoHotel(); 
+
+
+
+
+
         ?>
 
         <div class="header">
@@ -60,6 +68,17 @@
             <h2>Servicios disponibles</h2>
             <pre><?php Servicio::mostrarServiciosDisponibles(); ?></pre>
         </div>
+
+        <!-- Información completa de cada usuario-->
+        
+            
+    
+
+        
+
+        
+
+
 
 
         
