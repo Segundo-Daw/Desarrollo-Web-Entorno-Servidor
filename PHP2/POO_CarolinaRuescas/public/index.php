@@ -168,40 +168,5 @@
                    
                 </div> 
             </section>
-
-
-
-            
-
-            
-
-
-
-
-
-
-
-
-
-
-           
-
-
-            <!-- Información completa de cada usuario-->
-        
-
-
-            
-    
-
-        
-
-        
-
-
-
-
-        
-    
-</body>
+    </body>
 </html>
