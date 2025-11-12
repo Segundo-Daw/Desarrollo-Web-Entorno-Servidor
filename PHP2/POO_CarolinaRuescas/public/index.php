@@ -41,7 +41,7 @@
         $hotel->agregarUsuario($usuario2);
 
 
-        $hotel = $hotel->mostrarInfoHotel(); 
+        $hotel->mostrarInfoHotel(); 
 
 
 
