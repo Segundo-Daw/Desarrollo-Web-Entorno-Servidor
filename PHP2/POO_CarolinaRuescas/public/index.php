@@ -23,7 +23,7 @@
 
 
         // Crear hotel
-        $hotel = new Hotel("Hotel Mascotas Ruescas");
+        $hotel = new Hotel("Oasis Animal");
 
         // Crear usuarios
         $usuario1 = new Usuario("Juan Pérez", "juan@example.com", "1234");
@@ -57,7 +57,7 @@
 
 
         <header class="header">
-            <h1>Hotel para Mascotas Ruescas</h1>
+            <h1><?php echo $hotel->getNombre();?></h1>
         </header>
 
         <!-- Precios por tipo de mascota -->

@@ -1,24 +1,41 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+h1, h2, h3, p {
+    margin: 10px 0; /* márgenes arriba y abajo */
+    padding: 0;
+}
+
 
 
 body{
-    background-color: #085347;
+    background-color: #543b01a1;
 }
 
-.header{
-    background: linear-gradient(-20deg, #553d0c, #d4a611, #735a08, #553d0c);
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 10px 10px 15px rgba(146, 129, 0, 0.3);
-    border-bottom-left-radius: 500px;
-    border-bottom-right-radius: 500px;
+
+.header {
+  background-image: url('/resources/assets/header.png'); /* ← pon aquí la ruta de tu imagen */
+  background-size: cover;      /* hace que cubra todo el header */
+  background-position: center; /* centra la imagen */
+  height: 350px;               /* puedes ajustar la altura */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(49, 37, 11);
+  text-align: center;
+  box-shadow: 20px 20px 20px rgba(0,0,0,0.4);
 }
+
+
 
 .header h1 {
-  font-size: 2.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 4rem;
   letter-spacing: 2px;
-  text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+  text-transform: uppercase;
+  animation: aparecer 2s ease-in-out;
 }
 
 
@@ -51,7 +68,7 @@ body{
 /* Hover */
 .card-precio:hover {
     transform: scale(1.10); /* agranda un 5% */
-    background-color: rgba(218, 198, 131, 0.85); 
+    background-color: rgba(144, 96, 19, 0.85); 
     cursor: pointer;
 }
 
@@ -66,14 +83,14 @@ body{
 
 
 .titulos{
-    background: linear-gradient(-20deg, #bbad93, #d4a611, #735a08, #dfd6c6);
-    color: white;
-    justify-content: center;
+    background: linear-gradient(-20deg, #543804, #e4bd86, #e8c29c, #462e06);
+    color: rgb(49, 37, 11);
+    height:50px;
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;  /* centra verticalmente */
     display: flex;
     background-color: antiquewhite;
-    border-radius: 50px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+  
 }
 
 
@@ -81,34 +98,30 @@ body{
 /* Sección información del hotel*/
 .hotel {
     display: flex;
-    border-radius: 50px;
     justify-content: center;
     flex-wrap: wrap;  /*permite varias filas si ni caben*/ 
-    background-color: #fff9ca;
     box-sizing: border-box;
     gap: 20px;
     padding: 30px;
-    height: 500px;   
+    height: 350px;   
  
 }
 
 
 .card-hotel, .card-servicio {
     flex:1;
-    border: dotted 6px #221b03;
+    border: solid 3px #221b03;
     border-radius: 10px;
     padding: 20px;
-    background-color: #274b425f;
+    background-color: #f9e8c7f6;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 
 .mascotas{
     display: flex;
-    border-radius: 50px;
     justify-content: center;
     flex-wrap: wrap;  /*permite varias filas si ni caben*/ 
-    background-color: #fff9ca;
     box-sizing: border-box;
     gap: 20px;
     padding: 30px;
@@ -117,10 +130,10 @@ body{
 
 .card-mascota, .card-informacion-mascota {
     width: 100%;
-    border: dotted 6px #221b03;
+    border: solid 4px #221b03;
     border-radius: 10px;
     padding: 20px;
-    background-color: #274b425f;
+    background-color: #f9e8c7f6;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
@@ -129,5 +142,8 @@ body{
 
 
 
-
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
