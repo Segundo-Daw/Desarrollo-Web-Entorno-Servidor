@@ -1,10 +1,13 @@
 <?php
 
+
+
 class Empleade{
     private String $nombre;
     private String $apellidos;
+    private array $telefonos = [];
     private float $sueldo = -1; // al poner -1 indicamos que su no recibe sueldo sale -1
-    private array $telefonos;
+    
 
     public function __construct($nombre, $apellidos, $telefonos, $sueldo = -1){
         $this -> nombre =  $nombre;
@@ -93,7 +96,7 @@ class Empleade{
 
     }
 
-
+    //añadir teléfonos
     public function anadirTelefono(string $telefono){
         $this->telefonos[] = $telefono;
     }

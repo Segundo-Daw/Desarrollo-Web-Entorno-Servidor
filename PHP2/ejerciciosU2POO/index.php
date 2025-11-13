@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php
-    include $_SERVER["DOCUMENT_ROOT"] . "/PHP2/ejerciciosU2POO/clases/Empleade.php";
+    include_once $_SERVER["DOCUMENT_ROOT"] . "/clases/Empleade.php";
 
     $empleade1 = new Empleade("Carolina", "Ruescas Cruz",[], 24550);
     $empleade2 = new Empleade("Yolanda", "Martinez Cruz", [], 12200);
@@ -20,8 +20,11 @@
 
     $empleades = [$empleade1, $empleade2, $empleade3, $empleade4];
 
+
+
     foreach($empleades as $empleade){
         echo "<p>";
+        //con echo $empleade me muestra toda la infromación que hay en el __toString
         echo $empleade . "<br>";
         
         $sueldo = $empleade->pagarImpuestos();
