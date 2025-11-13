@@ -1,3 +1,5 @@
+
+
 body{
     background-color: #085347;
 }
@@ -24,26 +26,48 @@ body{
 .precios {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;  /*permite varias filas si ni caben*/ 
+    flex-wrap: wrap;  /*permite varias filas si no caben*/ 
     gap: 20px;
     padding: 40px;
     width: 100%;
     box-sizing: border-box;
 }
 
+
+
 /* Cards generales */
 .card-precio {
     flex: 1;
     width: 300px;           /* ancho uniforme para todas */
     text-align: center;
-    border-radius: 10px;
+    border: dotted 10px rgb(252, 248, 213);
+    border-radius: 100px;
     padding: 20px;
-    background-color: white;
+    background-color: rgba(218, 198, 131, 0.664);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-size: 20px;
+}
+
+/* Hover */
+.card-precio:hover {
+    transform: scale(1.10); /* agranda un 5% */
+    background-color: rgba(218, 198, 131, 0.85); 
+    cursor: pointer;
 }
 
 
+
+/*logo de los animales*/
+.card-precio i {
+    font-size: 40px;
+    color: #ffffff;
+}
+
+
+
 .titulos{
+    background: linear-gradient(-20deg, #bbad93, #d4a611, #735a08, #dfd6c6);
+    color: white;
     justify-content: center;
     display: flex;
     background-color: antiquewhite;
@@ -57,6 +81,7 @@ body{
 /* Sección información del hotel*/
 .hotel {
     display: flex;
+    border-radius: 50px;
     justify-content: center;
     flex-wrap: wrap;  /*permite varias filas si ni caben*/ 
     background-color: #fff9ca;
@@ -80,6 +105,7 @@ body{
 
 .mascotas{
     display: flex;
+    border-radius: 50px;
     justify-content: center;
     flex-wrap: wrap;  /*permite varias filas si ni caben*/ 
     background-color: #fff9ca;

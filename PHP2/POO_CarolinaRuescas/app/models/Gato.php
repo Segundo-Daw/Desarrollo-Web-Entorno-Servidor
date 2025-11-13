@@ -1,10 +1,10 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
 
 final class Gato extends Mascota{
     private String $raza;
     private bool $independiente;
-    private const TARIFA_BASE_DIA =  35;
+    public const TARIFA_BASE_DIA =  35;
 
 
     public function __construct($raza, $independiente, $name, $age, $numberDays, $servicios){
@@ -21,14 +21,13 @@ final class Gato extends Mascota{
 
         return $ret;
     }
-
-    //He hecho este get de forma manual para poder acceder a la tarifa base sin hacerla publica
-    public static function getTarifaBaseDia(): int {
+    public static function getTarifaBaseDia() {
         return self::TARIFA_BASE_DIA;
     }
 
+    
     // Por si habla un plus por entrenamiento
-    protected function calcularPlus(): float {
+    public function calcularPlus(): float {
         return $this->independiente ? 15 : 0; // +15€ si no es independiente
     }
 }

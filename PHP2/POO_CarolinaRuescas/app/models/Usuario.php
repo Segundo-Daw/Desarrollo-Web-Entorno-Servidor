@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
 
 
 class Usuario{

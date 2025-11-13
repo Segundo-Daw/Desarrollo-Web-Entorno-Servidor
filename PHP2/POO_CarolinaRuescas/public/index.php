@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOTEL DE MASCOTAS - Práctica POO</title>
+    <!-- Link a Font Awesome 6 para los emojis-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Link a mi css-->
     <link rel="stylesheet" href="css/style.css">
+    
+
 </head>
 <body>
     <?php
 
-        require $_SERVER["DOCUMENT_ROOT"] . "/app/models/Ave.php";
-        require $_SERVER["DOCUMENT_ROOT"] . "/app/models/Perro.php";
-        require $_SERVER["DOCUMENT_ROOT"] . "/app/models/Gato.php";
-        require $_SERVER["DOCUMENT_ROOT"] . "/app/models/Hotel.php";
-        require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
-        require $_SERVER["DOCUMENT_ROOT"] . "/app/models/Servicio.php";
-        require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Usuario.php";
-
-
-       
+        include $_SERVER["DOCUMENT_ROOT"] . "/app/models/Ave.php";
+        include $_SERVER["DOCUMENT_ROOT"] . "/app/models/Perro.php";
+        include $_SERVER["DOCUMENT_ROOT"] . "/app/models/Gato.php";
+        include $_SERVER["DOCUMENT_ROOT"] . "/app/models/Hotel.php";
+        include_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
+        include $_SERVER["DOCUMENT_ROOT"] . "/app/models/Servicio.php";
+        include_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Usuario.php";
 
 
         // Crear hotel
@@ -52,78 +53,78 @@
         // Añadir usuarios al hotel
         $hotel->agregarUsuario($usuario1);
         $hotel->agregarUsuario($usuario2);
-
-        
-
-
-
         ?>
-            <header class="header">
-                <h1>Hotel para Mascotas Ruescas</h1>
-            </header>
 
-            <!-- Precios por tipo de mascota -->
-            <section class="precios">
-                <div class="card-precio">
-                    <h2>PERROS</h2>
-                    <p>Precio inicial de <?= Perro::getTarifaBaseDia() ?>€ por día</p>
-                </div>
-                <div class="card-precio">
+
+        <header class="header">
+            <h1>Hotel para Mascotas Ruescas</h1>
+        </header>
+
+        <!-- Precios por tipo de mascota -->
+        <section class="precios">
+            <div class="card-precio">
+                <i class="fa-solid fa-dog"></i>                
+                <h2>PERROS</h2>
+                <p>Precio inicial de <?= Perro::TARIFA_BASE_DIA?>€ por día</p>
+            </div>
+
+            <div class="card-precio">
+                    <i class="fa-solid fa-cat"></i>                    
                     <h2>GATOS</h2>
-                    <p>Precio inicial de <?= Gato::getTarifaBaseDia() ?>€ por día</p>
+                    <p>Precio inicial de <?= Gato::TARIFA_BASE_DIA ?>€ por día</p>
                 </div>
                 <div class="card-precio">
+                    <i class="fa-solid fa-crow"></i>
                     <h2>AVES</h2>
-                    <p>Precio inicial de <?= Ave::getTarifaBaseDia() ?>€ por día</p>
+                    <p>Precio inicial de <?= Ave::TARIFA_BASE_DIA?>€ por día</p>
                 </div>
-            </section>
+        </section>
 
-            <!-- HOTEL-->
-            <div class="titulos">
-                    <h2>··· Información del Hotel ···</h2>
-            </div>
-            <section class="hotel">
-                <div class="card-hotel">
-                    <!-- Información del hotel -->
-                    <h3>Información general</h3>
-                    <?php echo $hotel->mostrarInfoHotel();?>
-                    <!-- Información sobre los ingresos totales -->
-                    <h3>Información Económica</h3>
-                    <?php echo $hotel->calcularIngresosTotales();?>
-                </div> 
+        <!-- HOTEL-->
+        <div class="titulos">
+            <h2>··· Información del Hotel ···</h2>
+        </div>
+
+        <section class="hotel">
+            <div class="card-hotel">
+            <!-- Información del hotel -->
+                <h3>Información general</h3>
+                <?php echo $hotel->mostrarInfoHotel();?>
+                <!-- Información sobre los ingresos totales -->
+                <h3>Información Económica</h3>
+                <?php echo $hotel->calcularIngresosTotales();?>
+            </div> 
                
-                <!-- Servicios disponibles -->
-                <div class="card-servicio">
-                    <h3>Servicios disponibles</h3>
-                    <pre><?php Servicio::mostrarServiciosDisponibles(); ?></pre>
-                </div>
-            
-            </section>
-
-           
-
-            <!--MASCOTAS-->
-            <div class="titulos">
-                    <h2>··· Información específica de cada mascota ···</h2>
+            <!-- Servicios disponibles -->
+            <div class="card-servicio">
+                <h3>Servicios disponibles</h3>
+                <?php Servicio::mostrarServiciosDisponibles(); ?>
             </div>
-            <section class="mascotas">
-                <div class="card-mascota">
-                    <h3>Precio total de cada mascota que esta hospedada en el hotel</h3>
-                    <ul>
-                        <li><?= $perro1->getName() ?>: <?= $perro1->calcularPrecioTotal() ?> €</li>
-                        <li><?= $gato1->getName() ?>: <?= $gato1->calcularPrecioTotal() ?> €</li>
-                        <li><?= $ave1->getName() ?>: <?= $ave1->calcularPrecioTotal() ?> €</li>
-                    </ul>
-                </div>
-                <div class="card-informacion-mascota">
-                    <h3>Desglose de información de cada mascota</h3>
-                    <ul>
-                        <li><pre><?= $perro1->mostrarInfoCompleta() ?></pre></li>
-                        <li><pre><?= $gato1->mostrarInfoCompleta() ?></pre></li>
-                        <li><pre><?= $ave1->mostrarInfoCompleta() ?></pre></li>
-                    </ul>
-                </div> 
-            </section>
+        </section>
+
+
+        <!--MASCOTAS-->
+        <div class="titulos">
+            <h2>··· Información específica de cada mascota ···</h2>
+        </div>
+        <section class="mascotas">
+            <div class="card-mascota">
+                <h3>Precio total de cada mascota que esta hospedada en el hotel</h3>
+                <ul>
+                    <li><?= $perro1->getName() ?>: <?= $perro1->calcularPrecioTotal() ?> €</li>
+                    <li><?= $gato1->getName() ?>: <?= $gato1->calcularPrecioTotal() ?> €</li>
+                    <li><?= $ave1->getName() ?>: <?= $ave1->calcularPrecioTotal() ?> €</li>
+                </ul>
+            </div>
+            <div class="card-informacion-mascota">
+                <h3>Desglose de información de cada mascota</h3>
+                <ul>
+                    <li><pre><?= $perro1->mostrarInfoCompleta() ?></pre></li>
+                    <li><pre><?= $gato1->mostrarInfoCompleta() ?></pre></li>
+                    <li><pre><?= $ave1->mostrarInfoCompleta() ?></pre></li>
+                </ul>
+            </div> 
+        </section>
 
 
             <?php
@@ -139,7 +140,7 @@
 
             <!--Cambios después de emplear métodos-->
             <div class="titulos">
-                    <h2>··· Cambios realizados con métodos ···</h2>
+                <h2>··· Cambios realizados con métodos ···</h2>
             </div>
             <section class="mascotas">
                 <div class="card-mascota">

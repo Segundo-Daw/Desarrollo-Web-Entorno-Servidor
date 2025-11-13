@@ -45,9 +45,9 @@ class Servicio{
 
      // Mostrar en pantalla los servicios con formato
     public static function mostrarServiciosDisponibles(){
-        echo "🐾 Servicios disponibles:\n";
+        echo "🐾 Servicios disponibles: <br>";
         foreach (self::$serviciosDisponibles as $servicio) {
-            echo "- " . $servicio->__toString() . "\n";
+            echo "- " . $servicio->__toString() . "<br>";
         }
     }
 

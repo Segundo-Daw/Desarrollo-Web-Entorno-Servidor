@@ -35,6 +35,8 @@ abstract class Mascota{
         return $ret;  
     }
 
+
+
     // Añadir un servicio, evitando duplicados
     public function anadirServicio(Servicio $servicio){
         foreach ($this->servicios as $s) {
@@ -63,6 +65,14 @@ abstract class Mascota{
         Servicio::mostrarServiciosDisponibles();
     }
 
+
+    
+    //Todas las clases hijas tienen implementado este método
+    abstract public static function getTarifaBaseDia();
+
+
+    //En Mascota no se sabe calcular el plus, porque depende de las subclases, al declararlo abstracto se obliga a implementearlo
+    abstract public function calcularPlus();
     
    // Método para calcular el precio total de los días dependiendo de si tiene servicios contratados o no
 
@@ -90,6 +100,30 @@ abstract class Mascota{
 
 
 
+    //metodo para mostrar los servicios que tiene cada mascota
+    public function mostrarServiciosMascota(){
+        if (!empty($this->servicios)) {
+            $info = "Servicios contratados:\n";
+            foreach ($this->servicios as $servicio) {
+                    $info .= "  - {$servicio->getNameService()} ({$servicio->getPrecio()}€)\n";
+                }
+        } else {
+            $info = "Servicios contratados: Ninguno\n";
+        }
+        return $info;
+    }
+
+    //Método para mostrar si tiene algun descuento aplicado
+    public function mostrarSiHayDescuento(){
+        if (count($this->servicios) >= 3) {
+                $info = "Descuento aplicado por 3 o más servicios: 20%\n";
+        }else{
+            $info = "Sin desceunto aplicado.";
+        }
+        return $info;
+
+    }
+
 
     //Método para mostrar toda la información detallada de cada mascota
     public function mostrarInfoCompleta(): string {
@@ -98,19 +132,8 @@ abstract class Mascota{
         $info .= "Tipo: $this->type \n";
         $info .= "Número de días: $this->numberDays\n";
 
-        // Mostrar servicios
-        if (!empty($this->servicios)) {
-            $info .= "Servicios contratados:\n";
-            foreach ($this->servicios as $servicio) {
-                    $info .= "  - {$servicio->getNameService()} ({$servicio->getPrecio()}€)\n";
-                }
-            
-            if (count($this->servicios) >= 3) {
-                $info .= "Descuento aplicado por 3 o más servicios: 20%\n";
-            }
-        } else {
-            $info .= "Servicios contratados: Ninguno\n";
-        }
+        $info  .= $this->mostrarServiciosMascota();
+        $info .= $this->mostrarSiHayDescuento();
 
         // Mostrar plus
         $plus = $this->calcularPlus();
