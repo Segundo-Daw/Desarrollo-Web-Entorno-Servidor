@@ -10,6 +10,8 @@
         include_once $_SERVER["DOCUMENT_ROOT"] . "/clases/Employee.php";
         include_once $_SERVER["DOCUMENT_ROOT"] . "/clases/Manager.php";
         include_once $_SERVER["DOCUMENT_ROOT"] . "/clases/Person.php";
+        include_once $_SERVER["DOCUMENT_ROOT"] . "/clases/PayLip.php";
+
 
         $empleade1 = new Employee("Carolina", "Ruescas Cruz",10000, []);
         $manager1 = new Manager("Yolanda", "Martinez Cruz", 25000, [], 3);
@@ -61,7 +63,12 @@
 
         //Sueldo final
         $sueldoFinal = $manager1->calculateSalary();
-        echo "El sueldo final es: " . $sueldoFinal;
+        echo "El sueldo final es: " . $sueldoFinal . "<br>";
+        echo"<br>";
+
+
+        //Nómina con la interfaz
+        echo "Nómina: " . $empleade1->createPayslip($empleade1);
 
        
 

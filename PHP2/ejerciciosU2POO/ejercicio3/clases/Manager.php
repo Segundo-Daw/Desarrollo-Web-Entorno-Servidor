@@ -1,6 +1,7 @@
 <?php
 include_once $_SERVER["DOCUMENT_ROOT"] . "/clases/Person.php";
 
+
 class Manager extends Person{
     private int $seniority = 0;
 
