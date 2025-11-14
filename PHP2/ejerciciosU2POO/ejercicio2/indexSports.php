@@ -7,8 +7,8 @@
 </head>
 <body>
     <?php
-    include $_SERVER["DOCUMENT_ROOT"] . "/PHP2/sports/Tennis.php";
-    include $_SERVER["DOCUMENT_ROOT"] . "/PHP2/sports/Rugby.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/clases/Tennis.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/clases/Rugby.php";
 
 
     //Construyo un objeto de la clase Sport (no se puede pero vamos a probar)

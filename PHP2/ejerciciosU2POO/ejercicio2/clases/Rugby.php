@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER["DOCUMENT_ROOT"] . "/PHP2/sports/Sport.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/clases/Sport.php";
 
 final class Rugby extends Sport{
     private String $teamName;

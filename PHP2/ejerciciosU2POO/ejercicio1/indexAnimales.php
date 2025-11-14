@@ -8,8 +8,8 @@
 <body>
     <h3>clases : Animales</h3>
     <?php
-    include $_SERVER["DOCUMENT_ROOT"] . "/PHP2/animales/Cat.php";
-    include $_SERVER["DOCUMENT_ROOT"] . "/PHP2/animales/Minotauro.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/clases/Cat.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/clases/Minotauro.php";
 
     
     $cat = new Cat("mario", "naranja",9);
