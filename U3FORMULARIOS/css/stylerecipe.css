@@ -1,0 +1,121 @@
+*{
+    padding: 0;
+    margin: 0
+}
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+header{
+    background: linear-gradient( pink, rgb(82, 57, 141), rgb(96, 68, 122));
+    padding: 25px 35px;
+    margin-bottom: 30px;
+    
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    text-decoration: underline dotted;
+    padding-bottom: 30px;
+}
+
+
+.form-recetas {
+    background: rgb(176, 157, 226);
+    padding: 25px 35px;
+    border-radius: 10px;
+    width: 400px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+label {
+    margin-bottom: 6px;
+    color: #000000;
+}
+
+input[type="text"],input[type="number"], select {
+    padding: 8px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+
+
+fieldset {
+    border: 3px dotted #360068;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+fieldset legend {
+    color: #464646;
+}
+
+.boton-submit {
+    width: 100%;
+    padding: 10px;
+    background: #4b0077;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.boton-submit:hover {
+    background: #045658;
+}
+
+
+.error{
+    font-size: 1rem;
+    color: red;
+}
+
+.radioError{
+    color: rgb(255, 255, 255);
+    background-color: rgba(255, 0, 0, 0.918);
+    border: dotted 4px black;
+    border-radius: 30px;
+    padding: 8px;
+
+}
+
+footer{
+    background: linear-gradient( pink, rgb(82, 57, 141), rgb(96, 68, 122));
+    height: 50px;
+    
+}
+
+h3{
+    text-align: center;
+    padding: 10px;
+    color: #ffffff;
+}

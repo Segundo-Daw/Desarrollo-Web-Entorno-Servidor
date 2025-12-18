@@ -1,0 +1,44 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+div{
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    width: 350px;
+    border: 4px solid;
+}
+
+.error{
+    color: red;
+    font-size: 0.5em;
+}
+
+.name{
+    background-color: rgb(196, 119, 240);
+    border-color: rgb(27, 5, 48);
+}
+
+.cursos{
+    background-color: rgba(28, 187, 187, 0.589);
+    border-color:   rgb(2, 48, 45);
+}
+
+.password{
+    background-color: rgba(74, 94, 184, 0.589);
+    border-color:  rgb(3, 37, 56);
+}
+
+.email{
+    background-color: rgba(184, 136, 74, 0.589);
+    border-color:  rgb(68, 27, 0);
+    
+}
+
+.edad{
+    background-color: rgba(21, 129, 54, 0.521);
+    border-color:  rgb(5, 49, 20);
+     
+}

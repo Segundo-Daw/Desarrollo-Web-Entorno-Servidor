@@ -1,0 +1,27 @@
+.error{
+    font-size: 1rem;
+    color: red;
+}
+
+.checkError{
+    color: rgb(255, 255, 255);
+    background-color: rgba(255, 0, 0, 0.918);
+    border: dotted 4px black;
+    border-radius: 30px;
+    padding: 8px;
+
+}
+
+
+h1{
+    color: rgb(0, 73, 70);
+    text-decoration: underline orange;
+}
+
+.general{
+    color: rgb(255, 255, 255);
+    background-color: rgba(17, 121, 115, 0.493);
+    border: dotted 4px black;
+    padding: 20px;
+    width: 400px;
+}

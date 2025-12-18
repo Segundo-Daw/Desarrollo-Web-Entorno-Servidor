@@ -35,6 +35,8 @@ include("./modeloB.php");
         }
     }
 
+    
+
     echo "<h2>Ejercicio 3</h2>";
     echo "<ul>";
     
