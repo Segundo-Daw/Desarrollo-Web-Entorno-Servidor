@@ -240,7 +240,6 @@ foreach ($ciudades['Argentina'] as $ciudad => $datos) {
 
 echo "Población total de las ciudades de Argentina: $sumaPoblacion";
 
-
-
+/**/ 
 
 ?>
