@@ -4,9 +4,10 @@ require_once $_SERVER["DOCUMENT_ROOT"]. "/pc/Component.php";
 
 class ComponentDAO{
     //create en como el otro que hemos hecho pero llamado insert
-    public static function create(Component $c): int{
+    public static function create(Component $c, $pc_id = null): int{
        
         $conn = CoreDB::getConnection();
+        /*
         $sql = "INSERT INTO components (name, brand, model) VALUES (
             \"{$c->getName()}\",
             \"{$c->getBrand()}\",
@@ -17,6 +18,19 @@ class ComponentDAO{
         $c->setId($id);
         $conn->close();
         return $id;
+        */
+        //Lo voy a cambiar para utilizar prepared statements
+        $sql = "INSERT into components (name, brand, model, pc_id) values (?, ?, ?, ?);";
+
+        $ps = $conn->prepare($sql);
+        //hago el bind
+
+        //ejecuto la query
+
+        //obtengo el id con el que se ha insertado
+
+        //return
+        
 
         
     }
@@ -29,6 +43,8 @@ class ComponentDAO{
     public static function read (int $id) :?Component{
         $conn = CoreDB::getConnection();
         $sql = "SELECT * from components where id = $id";
+        //$id = "0; delete * from componentes where 1 = 1";
+        //select * from componentes where id = 0; delete *from componentes where 1 = 1;
         $result = $conn->query($sql);
         $conn->close();
         if(($row = $result->fetch_assoc()) != null){
@@ -60,25 +76,51 @@ class ComponentDAO{
         $conn->query($sql);
         $num = $conn->affected_rows;   
         $conn->close(); 
-        //si he actualizado alguna (el número de filas afectadas es > 0) devuelvo true    
-        if($num > 0){
+        //Si he actualizado alguna (el número de filas afectadas es > 0) devuelvo true
+        /*if ($num > 0) {
             return true;
         }
-        return false;
+        return false;*/
+        return ($num > 0);
 
     }
 
-    public static function delete(int $id) : Component{
+     /**
+     * Devuelve el Component eliminado, o null si no existía un componente con ese id
+     * @param int $id
+     * @param mysqli $conn
+     * @return void
+     */
+    public static function delete(int $id): Component
+    {
         $c = ComponentDAO::read($id);
         $conn = CoreDB::getConnection();
         $sql = "DELETE from components where id = $id";
-        $conn->query($sql);
+        $conn->query($sql); //Lo elimina
         $conn->close();
         return $c;
-
     }
 
-    public static function readAll(mysqli $conn):array{
-
+    /**
+     * Función que devuelve un array con todos los componentes leídos de la bd
+     * o un array vacío si no hay ninguno
+     * @return array
+     */
+    public static function readAll(): array
+    {
+        $arr = [];
+        $conn = CoreDB::getConnection();
+        $sql = "SELECT * from components";
+        $result = $conn->query($sql);
+        while (($row = $result->fetch_assoc()) != null) {
+            $arr[] = new Component(
+                $row["name"],
+                $row["brand"],
+                $row["model"],
+                $row["id"]
+            );
+        }
+        $conn->close();
+        return $arr;
     }
 }
