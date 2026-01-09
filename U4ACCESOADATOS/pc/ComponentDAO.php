@@ -23,13 +23,25 @@ class ComponentDAO{
         $sql = "INSERT into components (name, brand, model, pc_id) values (?, ?, ?, ?);";
 
         $ps = $conn->prepare($sql);
-        //hago el bind
+        //hago el bind (asignar valores a los interrogantes ?)
+        $name = $c->getName();
+        $brand = $c->getBrand();
+        $model = $c->getModel();
+        //$id = $pc_id;   //no es necesario
+        $ps->bind_param("ssss", $name, $brand, $model, $pc_id);
 
         //ejecuto la query
+        $ps->execute();
 
         //obtengo el id con el que se ha insertado
+        $id = $ps->insert_id; 
+        $c->setId($id);
+
+        //cerramos conexión
+        $conn->close();
 
         //return
+        return $id;
         
 
         
@@ -123,4 +135,12 @@ class ComponentDAO{
         $conn->close();
         return $arr;
     }
+
+    public static function readByPcId($id){
+        
+
+
+    }
+
+
 }

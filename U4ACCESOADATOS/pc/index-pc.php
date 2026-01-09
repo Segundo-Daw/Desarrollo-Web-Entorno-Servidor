@@ -7,22 +7,24 @@
 </head>
 <body>
     <?php
-    include $_SERVER["DOCUMENT_ROOT"] . "/pc/Component.php";
+    require_once $_SERVER["DOCUMENT_ROOT"] . "/pc/PcDAO.php";
+    require_once $_SERVER["DOCUMENT_ROOT"] . "/pc/Pc.php";
+    require_once $_SERVER["DOCUMENT_ROOT"] . "/pc/Component.php";
 
-    //Conexión a la base de datos
-    try{
-        $conn = new mysqli("127.0.0.1", "root", "Sandia4you", "shop"); //Puerto default 3306
-    }catch(Exception $e){
-        echo "<p>Error en la conexión: {$e->getMessage()}</p>";
-        echo "<p>no puedo continuar</p>";
-        exit();
-    }
+    $pc = new Pc("asus199", "dani", "Asus", 1364.1);
+    $c1 = new Component("ssd", "samsung", "58H");
+    $c2 = new Component("ram", "samsung", "w526");
+    $c3 = new Component("mouse", "logitech", "asd");
 
-    $c = new Component("ordenador", "LG", "WV23");
+    // Añadir al pc los componentes
+    $pc->addComponent($c1);
+    $pc->addComponent($c2);
+    $pc->addComponent($c3);
 
-    //llamamos al método estático
-    $id = Component::create($c, $conn);
-    echo "<p>Se ha insertado un componente con $c con id $id</p>";
+    //guardarlo en la base de datos
+    PcDAO::create($pc);
+
+
 
 
 
