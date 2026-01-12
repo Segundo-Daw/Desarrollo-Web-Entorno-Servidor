@@ -10,15 +10,30 @@ class Pc{
         
     ){}
 
+    public function __toString(){
+        //return "Id del PC: $this->id $this->owner $this->brand $this->price  - Components: " . implode(",", $this->components);
+
+
+        return "<ul>
+                        <li>Id del PC: $this->id</li>
+                        <li>Propietario: $this->owner</li>
+                        <li>Marca: $this->brand</li>
+                        <li>Precio: $this->price</li>
+                        <li>Components: ". implode("<br> ", $this->components) . "</li>
+                </ul>";
+       
+    }
+
+
+    
+
+
+
     public function addComponent($c){
         $this->components[] = $c;
     }
 
 
-
-        
-
-      
         public function getId()
         {
                 return $this->id;

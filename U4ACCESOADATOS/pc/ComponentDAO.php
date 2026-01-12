@@ -1,4 +1,6 @@
 <?php
+
+use LDAP\Result;
 require_once $_SERVER["DOCUMENT_ROOT"]. "/pc/CoreDB.php";
 require_once $_SERVER["DOCUMENT_ROOT"]. "/pc/Component.php";
 
@@ -137,7 +139,23 @@ class ComponentDAO{
     }
 
     public static function readByPcId($id){
-        
+        $components = array();
+        $conn = CoreDB::getConnection();
+        $sql = "SELECT * from components where pc_id = ?";
+        //prepraro el statement(la consulta)
+        $ps = $conn->prepare($sql);
+        //bind
+        $ps->bind_param("s", $id);
+        //lanzo
+        $ps->execute();
+        //obtengo resultados
+        $result = $ps->get_result();
+        while(($row = $result->fetch_assoc())!= null){
+            $components[] = new Component($row["name"], $row["brand"], $row["model"], $row["id"]);
+        }
+
+        return $components;
+        $conn->close();
 
 
     }

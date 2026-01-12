@@ -62,7 +62,7 @@ class PcDAO{
             $row = $result->fetch_assoc();  //el fetch_assoc convierte el primer resultado del mysqli_result en un array asociativo
             $pc = new PC($id, $row["owner"], $row["brand"], $row["price"]);
             //Ahora tengo que leer los componentes donde su pc_id sea el de este pc
-            
+            $pc-> setComponents(ComponentDAO::readByPcId($id));
 
         }else{
             $pc = null;

@@ -9,10 +9,20 @@ class Component{
     ){}
 
     public function __tostring(){
+        /*
         return "ID: " . $this->id . 
                 ", Nombre: " . $this->name . 
                 ", Marca: " . $this->brand . 
                 ", Modelo: " . $this->model;
+*/
+        
+        return "<ul>
+                        <li>Nombre: $this->name</li>
+                        <li>Marca: $this->brand</li>
+                        <li>Modelo: $this->model</li>
+                        <li>ID: $this->id</li>
+                </ul>";
+        
     }
 
     

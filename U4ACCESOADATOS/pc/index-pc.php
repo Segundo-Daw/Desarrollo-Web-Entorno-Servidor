@@ -22,7 +22,10 @@
     $pc->addComponent($c3);
 
     //guardarlo en la base de datos
-    PcDAO::create($pc);
+    //PcDAO::create($pc);  
+    echo PcDAO:: read("asus199");
+
+
 
 
 
