@@ -31,12 +31,19 @@ class PcDAO{
         $ps->bind_param("sssd", $id, $owner, $brand, $price);
 
         /*Ahora es importante EJECUTAR la sentencia anterior*/
-        $ret = $ps->execute(); // aqui se guarda en la bd el ordenador
+        try{
+            $ret = $ps->execute(); // aqui se guarda en la bd el ordenador
 
-        //Guardo los componentes en la bd:
-        foreach($pc->getComponents() as $component){
-            //como la tenemos la funcion en component. php la llamamos
-            ComponentDAO::create($component, $id);
+            //Guardo los componentes en la bd:
+            foreach($pc->getComponents() as $component){
+                //como la tenemos la funcion en component. php la llamamos
+                ComponentDAO::create($component, $id);
+            }
+        }catch(mysqli_sql_exception $e){  //alternativa a catch(Exception $e){}
+            // return $e->getMessage(); //aqui devolveria el mensaje asociado a la excepción
+            return false;
+
+
         }
 
         $conn->close();
@@ -67,8 +74,6 @@ class PcDAO{
         }else{
             $pc = null;
         }
-
-
 
 
 
