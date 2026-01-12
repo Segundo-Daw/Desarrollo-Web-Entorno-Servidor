@@ -86,8 +86,16 @@ class PcDAO{
         return false;
     }
 
+    /**
+     * elimina un pc de la base de datos <strong>junto con todos sus componentes asociados</strong>
+     * @param string $id id del pc que quiero eliminar
+     * @return Pc|null objeto pc eliminado
+     */
     public static function delete($id): ?Pc{
-        //todo
+        //primero elimino componentes asociados (porque la FK está en components)
+        // y luego elimino pc
+
+        
         return null;
     }
 
