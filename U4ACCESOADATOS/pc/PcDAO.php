@@ -94,10 +94,26 @@ class PcDAO{
     public static function delete($id): ?Pc{
         //primero elimino componentes asociados (porque la FK está en components)
         // y luego elimino pc
+        $pc = PcDAO::read($id);
+        if($pc ==null){
+            return null;
+        }
 
+        $conn = CoreDB::getConnection();
+        //recorro los componenetes
+        foreach($pc->getComponents() as $c){
+            ComponentDAO::delete($c->getId());
+        }
+
+        $sql = "DELETE from pcs where id = ?";
+        $ps = $conn->prepare($sql);
+        $ps->bind_param("s", $id);
+        $ps->execute();
+        $conn->close();
         
-        return null;
+        return $pc;
     }
+
 
     public static function readAll(){
         //todo

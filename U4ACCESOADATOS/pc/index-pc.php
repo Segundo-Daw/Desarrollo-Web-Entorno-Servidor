@@ -17,6 +17,7 @@
     $c2 = new Component("ram", "samsung", "w526");
     $c3 = new Component("mouse", "logitech", "asd");
 
+    
     // Añadir al pc los componentes
     $pc->addComponent($c1);
     $pc->addComponent($c2);
@@ -43,6 +44,10 @@
     }else{
         echo "no se ha creado :(";
     }
+
+    echo PcDAO:: delete("asus199");
+
+
 
 
 

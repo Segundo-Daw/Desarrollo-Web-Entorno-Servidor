@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
 
-    //3. si todo esta bien: me voy a index (sesión) (guardando antes todas las cosas)
+    //3. si todo esta bien: me voy a index (sesión) (guardando antes todas las cosas) ------>>  y lo guardo en la base de datos
     if(!$errors){
         $_SESSION["fullname"] = $name;
         $_SESSION["signup-email"] = $email;
@@ -49,6 +49,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $_SESSION["origin"] = "signup";
 
         header("Location: index.php");
+
+        //Lo guardo en la base de datos:
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/app/repositories/UserDAO.php";
+
+        $u = new User($name, $email, $pass, $comunidad);
+        UserDAO::create($u);
+
+        exit();
 
 
     }
