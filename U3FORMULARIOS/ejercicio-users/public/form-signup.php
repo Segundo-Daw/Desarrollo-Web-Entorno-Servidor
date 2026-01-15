@@ -6,7 +6,7 @@ session_start();
 $name = $email = $pass = $pass2 = $comunidad = $conect = "";
 $passError = $nameError = $emailError = "";
 $errors = false;
-
+$errorDB = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     //1. recoger datos
@@ -40,23 +40,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     //3. si todo esta bien: me voy a index (sesión) (guardando antes todas las cosas) ------>>  y lo guardo en la base de datos
     if(!$errors){
-        $_SESSION["fullname"] = $name;
-        $_SESSION["signup-email"] = $email;
-        //$_SESSION["signup-password"] = $name;
-        //Las contraseñas no se envían
-        $_SESSION["region"] = $comunidad;
-        //todo stay-connected es movida de cookies
-        $_SESSION["origin"] = "signup";
-
-        header("Location: index.php");
-
-        //Lo guardo en la base de datos:
         require_once $_SERVER["DOCUMENT_ROOT"] . "/app/repositories/UserDAO.php";
+        $u = new User($name, $email, $pass, Region::fromCaseName($comunidad));
+        if(UserDAO::create($u)){
+            $_SESSION["fullname"] = $name;
+            $_SESSION["signup-email"] = $email;
+            //$_SESSION["signup-password"] = $name;
+            //Las contraseñas no se envían
+            $_SESSION["region"] = $comunidad;
+            //todo stay-connected es movida de cookies
+            $_SESSION["origin"] = "signup";
+            $_SESSION["id"] = $u->getId();
+            header("Location: index.php");
+            exit();
+        }else{
+            
+            $errorDB = "Ya existe ese email";
 
-        $u = new User($name, $email, $pass, $comunidad);
-        UserDAO::create($u);
+        }
 
-        exit();
+        
 
 
     }
@@ -91,6 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      <?php include $_SERVER['DOCUMENT_ROOT'] . "/resources/views/layouts/header.php";?>
 
     <main>
+        <?= $errorDB?>
         <!--Incluimos el formulario de signup-->
         <?php include $_SERVER['DOCUMENT_ROOT'] . "/resources/views/components/signup.php";?>
 

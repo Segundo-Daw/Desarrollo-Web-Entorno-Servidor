@@ -1,5 +1,8 @@
 <?php
 
+require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/User.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/app/core/CoreDB.php";
+
 class UserDAO{
 
     /**
@@ -9,14 +12,13 @@ class UserDAO{
      */
     public static function  create(User $user) : bool{
         $conn = CoreDB::getConnection();
-        $sql = "INSERT into users (name, email, password) values (?,?,?)";
+        $sql = "INSERT into users (name, email, pass, region) values (?,?,?,?)";
         $ps = $conn->prepare($sql);
         $name = $user->getName();
         $email =$user->getEmail();
-        $pass = $user->getPass();
-
-        $passHash = password_hash($pass, PASSWORD_DEFAULT);
-        $ps->bind_param("sss", $name, $email, $passHash);
+        $pass = password_hash($user->getPass(), PASSWORD_DEFAULT);
+        $region = $user->getRegionAsString();
+        $ps->bind_param("ssss", $name, $email, $pass, $region);
 
         try{
             $ps->execute();
@@ -40,5 +42,8 @@ class UserDAO{
      */
     public static function checkPassword($email, $pass) : int{
         return 0;
+    }
+    public static function read($id):?User{
+        return null;
     }
 }

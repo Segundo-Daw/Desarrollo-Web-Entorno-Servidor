@@ -3,18 +3,16 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
 
 
 class Usuario{
-    private String $nameUser;
-    private String $email;
-    private String $password;
-    private array $mascotas = [];
 
+    public function __construct(
+        private String $nameUser,
+        private String $email,
+        private String $password,
+        private array $mascotas = [],
+        private int $id = -1,
 
-    public function __construct($nameUser, $email, $password){
-        $this->nameUser = $nameUser;
-        $this->email=$email;
-        $this->password = $password;
-    }
-    
+    ){}
+   
     public function getNameUser(){
         return $this->nameUser;
     }
@@ -40,7 +38,7 @@ class Usuario{
     }
 
     public function __toString() {
-        $ret = "<ul><li>Usuario: $this->nameUser " .  "|  Email: $this->email " .  " | Total de mascotas: " . count($this->mascotas) . "</li></ul>";
+        $ret = "<ul><li>Usuario: $this->nameUser " .  "|  Email: $this->email " .  " | Total de mascotas: " . count($this->mascotas) . " | Id: ". $this->id . "</li></ul>";
 
         return $ret;
     }

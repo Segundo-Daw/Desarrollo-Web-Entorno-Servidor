@@ -1,7 +1,6 @@
 <?php
 include_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Region.php";
-class User
-{
+class User{
     public function __construct(
         private String $name,
         private String $email,
@@ -52,5 +51,17 @@ class User
                 $this->id = $id;
 
                 return $this;
+        }
+
+        public function getRegionAsString(){
+                return $this->region->value;
+        }
+
+        /**
+         * Get the value of id
+         */ 
+        public function getId()
+        {
+                return $this->id;
         }
 }

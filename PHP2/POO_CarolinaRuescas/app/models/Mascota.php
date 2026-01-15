@@ -1,18 +1,17 @@
 <?php 
 
 abstract class Mascota{
-    private String $name;
-    private int $age;
-    private int $numberDays;  /* dias que se quedan hospedados los animales*/ 
-    private array $servicios = [];
-    protected String $type;   /* si es perro, gato o ave*/
+  
 
-    public function __construct($name, $age, $numberDays, $servicios){
-        $this -> name = $name;
-        $this -> age = $age;
-        $this -> numberDays = $numberDays;
-        $this->servicios = $servicios;
-    }
+    public function __construct(
+        private String $name,
+        private int $age,
+        private int $numberDays,  /* dias que se quedan hospedados los animales*/ 
+        private array $servicios = [],
+        protected String $type,   /* si es perro, gato o ave*/
+        private int $id = -1
+    ){}
+    
 
     //Este lo he hecho para poder hacer el metodo en Hotel de ingresos por mascotas
     public function getName(){
@@ -30,7 +29,8 @@ abstract class Mascota{
             "Días que se queda en el hotel: {$this->numberDays}\n" . 
             "Tipo de mascota: {$this->type}\n" . 
             "Servicios: {$serviciosAsStr}\n" . 
-            "Costo total: " . ($this->calcularPrecioTotal()) . "€\n";
+            "Costo total: " . ($this->calcularPrecioTotal()) . "€\n" . 
+            "ID: {$this->id}";
 
         return $ret;  
     }

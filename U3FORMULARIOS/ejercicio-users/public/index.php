@@ -51,7 +51,7 @@ if(!(isset($_COOKIE["stay-connected"]) or isset($_SESSION["origin"]))){
             
             /*$region = "madrid";
             $u = new User("nombre", "a@a.com", "asdf", constant("Region::$region"));*/
-            $region = $_SESSION["region"];
+            /*$region = $_SESSION["region"];
             $u = new User(
                 $_SESSION["fullname"],
                 $_SESSION["signup-email"],
@@ -60,6 +60,13 @@ if(!(isset($_COOKIE["stay-connected"]) or isset($_SESSION["origin"]))){
             );
             //Lo imprimo
             echo $u;
+        }*/
+        
+            //esta parte con el añadido de buscaren la base de datos
+            require_once $_SERVER["DOCUMENT_ROOT"] . "/app/repositories/UserDAO.php";
+            $id = $_SESSION["id"];
+            $u = UserDAO::read($id);
+            echo "<p>$u</p>";
         }
 
         if (isset($_SESSION["origin"]) and $_SESSION["origin"] == "login") {

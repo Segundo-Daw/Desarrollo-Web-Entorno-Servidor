@@ -1,6 +1,5 @@
 <?php
-enum Region: String
-{
+enum Region: String{
     case andalucia = 'Andalucía';
     case aragon = 'Aragón';
     case asturias = 'Asturies';
@@ -20,4 +19,15 @@ enum Region: String
     case valencia = 'País Valencià';
     case ceuta = 'Ceuta';
     case melilla = 'Melilla';
+
+    //Método para buscar por nombre del case
+    public static function fromCaseName(string $caseName):?self{
+        $caseName = strtolower($caseName);
+        foreach(self::cases()as $case){
+            if(strtolower($case->name)=== $caseName){
+                return $case;
+            }
+        }
+        return null;
+    }
 }
