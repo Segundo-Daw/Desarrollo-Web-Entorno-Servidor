@@ -5,16 +5,16 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Mascota.php";
 class Usuario{
 
     public function __construct(
-        private String $nameUser,
+        private String $name,
         private String $email,
-        private String $password,
+        private String $pass,
         private array $mascotas = [],
         private int $id = -1,
 
     ){}
    
-    public function getNameUser(){
-        return $this->nameUser;
+    public function getName(){
+        return $this->name;
     }
     
     public function getEmail(){
@@ -25,8 +25,8 @@ class Usuario{
         return $this->mascotas;
     }
 
-    public function setNameUser($nameUser){
-        $this->nameUser = $nameUser;
+    public function setNameUser($name){
+        $this->nameUser = $name;
 
         return $this;
     }
@@ -38,7 +38,7 @@ class Usuario{
     }
 
     public function __toString() {
-        $ret = "<ul><li>Usuario: $this->nameUser " .  "|  Email: $this->email " .  " | Total de mascotas: " . count($this->mascotas) . " | Id: ". $this->id . "</li></ul>";
+        $ret = "<ul><li>Usuario: $this->name " .  "|  Email: $this->email " .  " | Total de mascotas: " . count($this->mascotas) . " | Id: ". $this->id . "</li></ul>";
 
         return $ret;
     }
@@ -65,7 +65,7 @@ class Usuario{
 
     // Mostrar información del usuario y sus mascotas
     public function mostrarInfo() {
-        echo "Usuario: {$this->nameUser}\n";
+        echo "Usuario: {$this->name}\n";
         echo "Email: {$this->email}\n";
 
         $totalMascotas = count($this->mascotas); // contar mascotas
@@ -83,6 +83,26 @@ class Usuario{
     }
 
 
+
+        /**
+         * Get the value of password
+         */ 
+        public function getPass()
+        {
+                return $this->pass;
+        }
+
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
+
+                return $this;
+        }
 }
 
 

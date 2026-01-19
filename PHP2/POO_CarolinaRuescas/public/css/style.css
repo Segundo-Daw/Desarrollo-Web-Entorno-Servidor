@@ -25,6 +25,7 @@ body{
 }
 
 
+
 .header {
   background-image: url('/resources/assets/header.png'); /* ← pon aquí la ruta de tu imagen */
   background-size: cover;      /* hace que cubra todo el header */
@@ -112,7 +113,7 @@ body{
     display: flex;
     justify-content: center;
     margin-top: 40px;   /* 👈 controla la distancia desde el nav */
-    padding: 20px;
+    padding: 100px;
     box-sizing: border-box;
 }
 
@@ -231,6 +232,31 @@ button:hover {
     margin-top: 5px;
     display: none;
 }
+
+.success {
+    color: var(--success-color);
+    background-color: #d4edda;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid #c3e6cb;
+}
+.footer {
+    width: 100%;               /* ocupar todo el ancho de la pantalla */
+    background-color: #1e1e2f; /* fondo oscuro */
+    color: #f0f0f0;           /* texto claro */
+    text-align: center;        /* centrar texto */
+    padding: 20px 0;           /* espacio arriba y abajo */
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border-top: 1px solid #444;
+    box-sizing: border-box;    /* para que padding no rompa el ancho */
+}
+
+
+
+
+
 
 
 

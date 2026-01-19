@@ -4,29 +4,29 @@
         <h2>Crear Cuenta</h2>
         <form action="<?=$_SERVER["PHP_SELF"] ?>" method="post" id="signupForm">
             <div class="form-group">
-                <label for="fullname">Nombre completo</label>
-                <input type="text" id="fullname" name="fullname" placeholder="Tu nombre completo" value="<?=$name?>" class="<?= empty($nameError) ? "" : "input-error" ?>">
-                <div class="error-message" id="fullname-error">Por favor, introduce tu nombre completo</div>
+                <label for="name">Nombre completo</label>
+                <input type="text" id="fullname" name="name" placeholder="Tu nombre completo" value="<?=$name?>" class="<?= empty($nameError) ? "" : "input-error" ?>">
+                <div class="error-message" id="name-error">Por favor, introduce tu nombre completo</div>
             </div>
 
             <div class="form-group">
-                <label for="signup-email">Email</label>
-                <input type="email" id="signup-email" name="signup-email" placeholder="tu@email.com" value="<?=$email?>" class="<?= empty($emailError) ? "" : "input-error" ?>">
-                <div class="error-message" id="signup-email-error">Por favor, introduce un email válido</div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="tu@email.com" value="<?=$email?>" class="<?= empty($emailError) ? "" : "input-error" ?>">
+                <div class="error-message" id="email-error">Por favor, introduce un email válido</div>
             </div>
 
             <?= empty($emailError) ? "" : "<p class='p-error'>$emailError</p>" ?>
 
             <div class="form-group">
-                <label for="signup-password">Contraseña</label>
-                <input type="password" id="signup-password" name="signup-password" placeholder="Crea una contraseña" class="<?= empty($passError) ? "" : "input-error" ?>">
-                <div class="error-message" id="signup-password-error">La contraseña debe tener al menos 6 caracteres</div>
+                <label for="pass">Contraseña</label>
+                <input type="password" id="pass" name="pass" placeholder="Crea una contraseña" class="<?= empty($passError) ? "" : "input-error" ?>">
+                <div class="error-message" id="pass-error">La contraseña debe tener al menos 6 caracteres</div>
             </div>
 
             <div class="form-group">
-                <label for="confirm-password">Confirmar contraseña</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Repite tu contraseña" class="<?= empty($passError) ? "" : "input-error" ?>">
-                <div class="error-message" id="confirm-password-error">Las contraseñas no coinciden</div>
+                <label for="pass2">Confirmar contraseña</label>
+                <input type="password" id="pass2" name="pass2" placeholder="Repite tu contraseña" class="<?= empty($passError) ? "" : "input-error" ?>">
+                <div class="error-message" id="pass2-error">Las contraseñas no coinciden</div>
             </div>
 
             <?= empty($passError) ? "": "<p class'error'>$passError</p>" ?>

@@ -1,5 +1,5 @@
 <?php
-//Cierra sesión y redirige a signup.
+//Cierra sesión y redirige a login.
 session_start();
 session_destroy();
 header("Location: form-login.php");

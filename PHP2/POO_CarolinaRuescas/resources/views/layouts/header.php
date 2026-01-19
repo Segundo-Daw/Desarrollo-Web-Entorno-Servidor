@@ -27,17 +27,17 @@
         <nav class="opciones">
             <div class="card-opciones">
                 <i class="fa-solid fa-user-plus"></i>   
-                <a href="/app/public/form-signup.php">Crear Usuario</a>            
+                <a href="/public/form-signup.php">Crear Usuario</a>            
             </div>
             
              <div class="card-opciones">
                 <i class="fa-solid fa-user-plus"></i>   
-                <a href="/app/public/form-login.php">Inicio de Sesión</a>            
+                <a href="/public/form-login.php">Inicio de Sesión</a>            
             </div>
 
              <div class="card-opciones">
                 <i class="fa-solid fa-user-plus"></i>   
-                <a href="/app/public/form-colsesession.php">Cerrar Sesión</a>            
+                <a href="/public/form-closesession.php">Cerrar Sesión</a>            
             </div>    
         </nav>
 
