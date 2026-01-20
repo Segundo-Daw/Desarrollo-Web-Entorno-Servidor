@@ -65,6 +65,7 @@ body{
 
 
 
+
 /* Cards generales */
 .card-opciones {
     flex: 1;
@@ -105,6 +106,13 @@ body{
     color: #ffffff;
 }
 
+.titulo{
+    text-align: center;
+}
+
+.titulo h1{
+    margin-bottom: 20px;
+}
 
 
 /*FORMULARIO*/
@@ -112,7 +120,6 @@ body{
 .container {
     display: flex;
     justify-content: center;
-    margin-top: 40px;   /* 👈 controla la distancia desde el nav */
     padding: 100px;
     box-sizing: border-box;
 }
@@ -243,22 +250,16 @@ button:hover {
     border: 1px solid #c3e6cb;
 }
 .footer {
-    width: 100%;               /* ocupar todo el ancho de la pantalla */
-    background-color: #1e1e2f; /* fondo oscuro */
-    color: #f0f0f0;           /* texto claro */
-    text-align: center;        /* centrar texto */
-    padding: 20px 0;           /* espacio arriba y abajo */
+    width: 100%;               
+    background-color: #b99fb0; 
+    color: #000000;           
+    text-align: center;        
+    padding: 20px 0;           
     font-family: Arial, sans-serif;
-    font-size: 14px;
-    border-top: 1px solid #444;
-    box-sizing: border-box;    /* para que padding no rompa el ancho */
+    font-size: 20px;
+    border-top: 5px solid #ffffff;
+    box-sizing: border-box;    
 }
-
-
-
-
-
-
 
 
 /* Míos */

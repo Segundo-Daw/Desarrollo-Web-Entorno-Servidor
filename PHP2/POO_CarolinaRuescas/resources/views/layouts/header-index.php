@@ -35,15 +35,11 @@
                 <a href="/public/form-login.php">Inicio de Sesión</a>            
             </div>
 
-           
+             <div class="card-opciones">
+                <i class="fa-solid fa-user-plus"></i>   
+                <a href="/public/form-closesession.php">Cerrar Sesión</a>            
+            </div>    
         </nav>
 
 
 
-
-
-
-
-
-</body>
-</html>
