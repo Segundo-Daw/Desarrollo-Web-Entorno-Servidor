@@ -39,6 +39,46 @@ class UsuarioDAO{
     }
 
 
+    public static function existsByEmail(string $email): bool {
+        $conn = CoreDB::getConnection();
+        $sql = "SELECT id FROM usuarios WHERE email = ? LIMIT 1";
+        $ps = $conn->prepare($sql);
+        $ps->bind_param("s", $email);
+        $ps->execute();
+        $ps->store_result();
+
+        $exists = $ps->num_rows > 0;
+
+        $ps->close();
+        $conn->close();
+
+        return $exists;
+    }
+
+
+    public static function findByEmail(string $email): ?Usuario {
+    $conn = CoreDB::getConnection();
+    $sql = "SELECT * FROM usuarios WHERE email = ? LIMIT 1";
+    $ps = $conn->prepare($sql);
+    $ps->bind_param("s", $email);
+    $ps->execute();
+
+    $result = $ps->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        return new Usuario(
+            $row["name"],
+            $row["email"],
+            $row["pass"]
+        );
+    }
+
+    return null;
+}
+
+
+
+
 
 
     public static function read($id):?Usuario{

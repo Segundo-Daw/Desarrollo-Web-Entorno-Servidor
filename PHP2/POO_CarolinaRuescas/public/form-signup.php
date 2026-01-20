@@ -2,6 +2,10 @@
 //Inicio de sesión
 session_start();
 
+require_once $_SERVER["DOCUMENT_ROOT"] . "/app/core/CoreDB.php"; 
+require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Usuario.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/app/repositories/UsuarioDAO.php";
+
 // Verificar si he llegado a través del botón submit(es decir, petición POST)
 $name = $email = $pass = $pass2  = $conect = "";
 $passError = $nameError = $emailError = "";
@@ -41,35 +45,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // 3. Si todo está bien, guardamos en la Base de Datos
     if (!$errors) {
-        // Importamos la clase de conexión que configuramos antes
-        require_once $_SERVER["DOCUMENT_ROOT"] . "/app/core/CoreDB.php"; 
+    try {
+        //comprobar si el email ya existe
+        if (UsuarioDAO::existsByEmail($email)) {
+            $emailError = "Este email ya está registrado";
+            $errors = true;
+        } else {
+            $usuario = new Usuario($name, $email, $pass);
+            $id = UsuarioDAO::create($usuario);
 
-        try {
-            $conexion = CoreDB::getConnection();
-            // Preparamos la sentencia SQL (asegúrate de que la tabla 'usuarios' exista en DBeaver)
-            $sql = "INSERT INTO usuarios (name, email, pass) VALUES (?, ?, ?)";
-            $stmt = $conexion->prepare($sql);
-
-            // Encriptar la contraseña por seguridad antes de guardarla
-            $passHash = password_hash($pass, PASSWORD_DEFAULT);
-
-            // "sss" indica que pasamos 3 strings
-            $stmt->bind_param("sss", $name, $email, $passHash);
-
-            if ($stmt->execute()) {
-                // Si se guarda bien en Docker, entonces sí redirigimos
-                $_SESSION["name"] = $name;
-                $_SESSION["email"] = $email;
-                header("Location: form-login.php"); 
+            if ($id) {
+                $_SESSION["name"] = $usuario->getName();
+                $_SESSION["email"] = $usuario->getEmail();
+                header("Location: form-login.php");
                 exit();
-            } else {
-                $emailError = "Error: El email ya podría estar registrado.";
             }
-            
-        } catch (Exception $e) {
-            $nameError = "Error de conexión con la base de datos: " . $e->getMessage();
         }
+    } catch (Exception $e) {
+        $nameError = "Error al guardar el usuario: " . $e->getMessage();
     }
+}
+
+
 }
 
 ?>

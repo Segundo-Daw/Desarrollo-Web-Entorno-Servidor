@@ -7,11 +7,11 @@ final class Perro extends Mascota{
     private bool $muerde;
     public const TARIFA_BASE_DIA = 40;
 
-    public function __construct($raza, $muerde, $name, $age, $numberDays, $servicios){
+    public function __construct($raza, $muerde, $name, $age, $numberDays, $type, $servicios=[], $id=-1){
         $this->raza = $raza;
         $this->muerde = $muerde;
         $this->type = "Perro";
-        parent::__construct($name, $age, $numberDays,$servicios);
+        parent::__construct($name, $age, $numberDays,$type, $servicios, $id);
     }
 
     public function __toString(){
@@ -35,6 +35,22 @@ final class Perro extends Mascota{
 
 
 
+
+    /**
+     * Get the value of raza
+     */ 
+    public function getRaza()
+    {
+        return $this->raza;
+    }
+
+    /**
+     * Get the value of muerde
+     */ 
+    public function getMuerde()
+    {
+        return $this->muerde;
+    }
 }
 
 

@@ -1,6 +1,8 @@
 <?php
 session_start();
 include_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Usuario.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/app/repositories/UsuarioDAO.php";
+
 
 $email = $name = $pass = $type = "";
 $emailError = $passError = $typeError = "";
@@ -16,6 +18,15 @@ if(isset($_COOKIE["stay-connected"])){
     header("Location: index.php");
     exit();
 }
+
+
+// Si esta logueado, es decir, si ya ha iniciado sesión no manda al Login, sino que deja en el index
+if (isset($_SESSION["origin"]) || isset($_COOKIE["stay-connected"])) {
+    // redirigimos al index porque no tiene sentido que vuelva a loguearse
+    header("Location: index.php");
+    exit();
+}
+
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -38,22 +49,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-    //3. Me voy o muestro errores
+    //3. Comprobar si el usuario existe
     if (!$errors) {
 
-        //Hago lo de la cookie de seguir conectado
-        if(isset($_POST["stay-connected"])){
-            setcookie("stay-connected", $email, time()+ 14*24*60*60, "/");  // con "/" le indicamos que se vean en todos los ficheros y el tiempo que dura en este caso son dos semanas
+        $usuario = UsuarioDAO::findByEmail($email);
+
+        // PRIMERA comprobación
+        if ($usuario === null) {
+            $emailError = "El usuario no existe";
+            $errors = true;
         }
-        //voy a eliminar, si existía, ese $_SESSION["error"]
-        unset($_SESSION["error"]);
+        //SEGUNDA comprobación
+        elseif (!password_verify($pass, $usuario->getPass())) {
+            $passError = "Contraseña incorrecta";
+            $errors = true;
+        }
 
-        $_SESSION["email"] = $email;
-        $_SESSION["origin"] = "login";
-        header("location: index.php");
-    }
+        //Hago lo de la cookie de seguir conectado
+        else{
+            if (isset($_POST["stay-connected"])) {
+            setcookie("stay-connected", $email, time() + 14*24*60*60, "/"); //en esete caso lo he puesto para que caduque a las 2 semanas
+            }
+
+            $_SESSION["email"] = $usuario->getEmail();
+            $_SESSION["name"] = $usuario->getName();
+            $_SESSION["origin"] = "login";
+
+            header("Location: index.php");
+            exit();
+        }
+    }    
 }
-
 ?>
 
 
@@ -83,10 +109,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         ?>
 
+        <!--Si el mail es incorrecto salta el mensaje de error y te deja en la misma página -->
+        <?php if ($emailError): ?>
+            <p class="error"><?= $emailError ?></p>
+        <?php endif; ?>
+
+        <!--Si la contraseña es incorrecto salta el mensaje de error y te deja en la misma página -->
+        <?php if ($passError): ?>
+            <p class="error"><?= $passError ?></p>
+        <?php endif; ?>
+
+
+
         <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/resources/views/components/login.php"; ?>
 
           <!-- Incluir footer -->
-     <?php include $_SERVER['DOCUMENT_ROOT'] . "/resources/views/layouts/footer.php";?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . "/resources/views/layouts/footer.php";?>
         
 
     </main>

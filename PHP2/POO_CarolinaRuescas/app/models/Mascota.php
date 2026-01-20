@@ -18,6 +18,8 @@ abstract class Mascota{
         return $this->name;
     }
 
+    
+
 
     public function __toString(){
         $serviciosAsStr = empty($this->servicios) ? 'Ninguno' : implode(', ', $this->servicios);
@@ -154,6 +156,42 @@ abstract class Mascota{
 
 
 
+
+        /**
+         * Get the value of age
+         */ 
+        public function getAge()
+        {
+                return $this->age;
+        }
+
+        /**
+         * Get the value of numberDays
+         */ 
+        public function getNumberDays()
+        {
+                return $this->numberDays;
+        }
+
+        /**
+         * Get the value of type
+         */ 
+        public function getType()
+        {
+                return $this->type;
+        }
+
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
+
+                return $this;
+        }
 }
 
 
