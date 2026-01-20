@@ -32,8 +32,7 @@ if(!(isset($_COOKIE["stay-connected"]) or isset($_SESSION["origin"]))){
     require_once $_SERVER["DOCUMENT_ROOT"] . "/app/repositories/UsuarioDAO.php";
     require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Usuario.php";
 
-    $usuario1 = new Usuario("carolina", "carol@gmail.com", "carol123");
-    UsuarioDAO::create($usuario1);
+    
 
 
 

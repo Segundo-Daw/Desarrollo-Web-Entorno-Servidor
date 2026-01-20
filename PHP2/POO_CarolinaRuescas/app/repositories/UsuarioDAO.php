@@ -16,7 +16,7 @@ class UsuarioDAO{
         //conexión
         $conn = CoreDB::getConnection(); 
         //sentencia preparada
-        $sql = "INSERT into users (name, email, pass) values (?,?,?)";
+        $sql = "INSERT into usuarios (name, email, pass) values (?,?,?)";
         $ps = $conn->prepare($sql);
         
         //bind(con pass hasheada(lo tenemos que hacer))

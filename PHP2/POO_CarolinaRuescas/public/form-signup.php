@@ -37,18 +37,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Si pasan el primer filtro pero son cortas, entran aquí
     $errors = true;
     $passError = "La contraseña debe tener al menos 6 caracteres.";
-}
-
-    // 3. Si todo está bien, puedes guardar temporalmente en sesión
-    if (!$errors) {
-        $_SESSION["name"] = $name;
-        $_SESSION["email"] = $email;
-        $_SESSION["origin"] = "signup";
-        header("Location: form-login.php"); // redirige
-        exit(); // detener el script inmediatamente para que no se siga ejecutando
     }
 
+    // 3. Si todo está bien, guardamos en la Base de Datos
+    if (!$errors) {
+        // Importamos la clase de conexión que configuramos antes
+        require_once $_SERVER["DOCUMENT_ROOT"] . "/app/core/CoreDB.php"; 
 
+        try {
+            $conexion = CoreDB::getConnection();
+            // Preparamos la sentencia SQL (asegúrate de que la tabla 'usuarios' exista en DBeaver)
+            $sql = "INSERT INTO usuarios (name, email, pass) VALUES (?, ?, ?)";
+            $stmt = $conexion->prepare($sql);
+
+            // Encriptar la contraseña por seguridad antes de guardarla
+            $passHash = password_hash($pass, PASSWORD_DEFAULT);
+
+            // "sss" indica que pasamos 3 strings
+            $stmt->bind_param("sss", $name, $email, $passHash);
+
+            if ($stmt->execute()) {
+                // Si se guarda bien en Docker, entonces sí redirigimos
+                $_SESSION["name"] = $name;
+                $_SESSION["email"] = $email;
+                header("Location: form-login.php"); 
+                exit();
+            } else {
+                $emailError = "Error: El email ya podría estar registrado.";
+            }
+            
+        } catch (Exception $e) {
+            $nameError = "Error de conexión con la base de datos: " . $e->getMessage();
+        }
+    }
 }
 
 ?>

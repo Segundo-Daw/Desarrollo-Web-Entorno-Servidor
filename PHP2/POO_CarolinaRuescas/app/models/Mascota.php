@@ -7,8 +7,8 @@ abstract class Mascota{
         private String $name,
         private int $age,
         private int $numberDays,  /* dias que se quedan hospedados los animales*/ 
-        private array $servicios = [],
         protected String $type,   /* si es perro, gato o ave*/
+        private array $servicios = [],
         private int $id = -1
     ){}
     
