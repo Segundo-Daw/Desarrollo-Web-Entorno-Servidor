@@ -10,13 +10,6 @@
                 <input type="email" id="email" name="email" placeholder="tu@email.com" required>
                 <div class="error-message" id="email-error">Por favor, introduce un email válido</div>
             </div>
-
-            <div class="form-group" id="name-group" style="display: none;">
-                <label for="name">Usuario</label>
-                <input type="text" id="name" name="name" placeholder="Tu nombre de usuario">
-                <div class="error-message" id="name-error">Por favor, introduce tu nombre de usuario</div>
-            </div>
-
             <div class="form-group">
                 <label for="pass">Contraseña</label>
                 <input type="password" id="pass" name="pass" placeholder="Tu contraseña" required>

@@ -30,20 +30,15 @@
                 <a href="/public/form-signup.php">Crear Usuario</a>            
             </div>
             
-             <div class="card-opciones">
-                <i class="fa-solid fa-user-plus"></i>   
+            <div class="card-opciones">
+                <i class="fa-solid fa-user-check"></i>  
                 <a href="/public/form-login.php">Inicio de Sesión</a>            
             </div>
-
-           
+            <div class="card-opciones">
+                <i class="fa-solid fa-house"></i>   
+                <a href="/public/index.php">Home</a></a>            
+            </div> 
         </nav>
-
-
-
-
-
-
-
 
 </body>
 </html>

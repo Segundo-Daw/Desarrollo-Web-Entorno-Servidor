@@ -31,12 +31,15 @@
             </div>
             
              <div class="card-opciones">
-                <i class="fa-solid fa-user-plus"></i>   
+                <i class="fa-solid fa-user-check"></i>    
                 <a href="/public/form-login.php">Inicio de Sesión</a>            
             </div>
-
+            <div class="card-opciones">
+                <i class="fa-solid fa-house"></i>  
+                <a href="/public/index.php">Home</a></a>            
+            </div>
              <div class="card-opciones">
-                <i class="fa-solid fa-user-plus"></i>   
+                <i class="fa-solid fa-user-slash"></i>   
                 <a href="/public/form-closesession.php">Cerrar Sesión</a>            
             </div>    
         </nav>

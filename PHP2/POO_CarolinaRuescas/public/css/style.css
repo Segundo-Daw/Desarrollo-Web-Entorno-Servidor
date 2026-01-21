@@ -76,7 +76,6 @@ body{
     justify-content: center;
     gap: 20px;                  /* espacio entre icono y texto */
     text-align: center;
-
     border: dotted 10px rgb(252, 248, 213);
     border-radius: 100px;
     padding: 20px;
@@ -126,7 +125,7 @@ body{
 
 .form-container {
     background-color: white;
-    border-radius: var(--border-radius);
+    border-radius: 40px;
     box-shadow: var(--box-shadow);
     padding: 30px;
     width: 100%;
@@ -210,12 +209,13 @@ button {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    width: 100%;
+    width: 60%;
     transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: var(--secondary-color);
+    background-color: pink;
+    color: black;
 }
 
 .form-footer {
@@ -251,7 +251,7 @@ button:hover {
 }
 .footer {
     width: 100%;               
-    background-color: #b99fb0; 
+    background-color: #d6ccd3; 
     color: #000000;           
     text-align: center;        
     padding: 20px 0;           
@@ -293,90 +293,9 @@ table{
 }
 th, td {
   padding: 12px 15px;
-  text-align: left;
+  text-align: center;
   border-bottom: 2px solid #000000;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-.titulos{
-    background: linear-gradient(-20deg, #543804, #e4bd86, #e8c29c, #462e06);
-    color: rgb(49, 37, 11);
-    height:50px;
-    justify-content: center;  
-    align-items: center;  
-    display: flex;
-    background-color: antiquewhite;
-  
-}
-
-*/
-
-/* Sección información del hotel
-.hotel {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;  
-    box-sizing: border-box;
-    gap: 20px;
-    padding: 30px;
-    height: 350px;   
- 
-}
-
-
-.card-hotel, .card-servicio {
-    flex:1;
-    border: solid 3px #221b03;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #f9e8c7f6;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-
-.mascotas{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;  
-    box-sizing: border-box;
-    gap: 20px;
-    padding: 30px;
-    height: 9%;
-}
-
-.card-mascota, .card-informacion-mascota {
-    width: 100%;
-    border: solid 4px #221b03;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #f9e8c7f6;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-*/
 
 
 
