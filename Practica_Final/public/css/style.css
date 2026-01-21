@@ -1,0 +1,307 @@
+:root {
+    --primary-color: #4d2e05;
+    --secondary-color: #6b8cbc;
+    --accent-color: #ff6b6b;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+h1, h2, h3, p {
+    margin: 10px 0; /* márgenes arriba y abajo */
+    padding: 0;
+}
+
+
+
+body{
+    background-color: #543b01a1;
+}
+
+
+
+.header {
+  background-image: url('/resources/assets/header.png'); /* ← pon aquí la ruta de tu imagen */
+  background-size: cover;      /* hace que cubra todo el header */
+  background-position: center; /* centra la imagen */
+  height: 350px;               /* puedes ajustar la altura */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(49, 37, 11);
+  text-align: center;
+  box-shadow: 20px 20px 20px rgba(0,0,0,0.4);
+}
+
+
+
+.header h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 4rem;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
+  text-transform: uppercase;
+  animation: aparecer 2s ease-in-out;
+}
+
+
+/* Contenido */
+
+.opciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;  /*permite varias filas si no caben*/ 
+    gap: 20px;
+    padding: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+
+/* Cards generales */
+.card-opciones {
+    flex: 1;
+    width: 300px;
+    display: flex;             
+    flex-direction: column;     /* icono arriba, texto abajo */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;                  /* espacio entre icono y texto */
+    text-align: center;
+    border: dotted 10px rgb(252, 248, 213);
+    border-radius: 100px;
+    padding: 20px;
+    background-color: rgba(218, 198, 131, 0.664);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-opciones a{
+    color: black ;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+}
+
+/* Hover */
+.card-opciones:hover {
+    transform: scale(1.10); /* agranda un 5% */
+    background-color: rgba(144, 96, 19, 0.85); 
+    cursor: pointer;
+}
+
+
+
+/*logo de los menús*/
+.card-opciones i {
+    font-size: 40px;
+    color: #ffffff;
+}
+
+.titulo{
+    text-align: center;
+}
+
+.titulo h1{
+    margin-bottom: 20px;
+}
+
+
+/*FORMULARIO*/
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 100px;
+    box-sizing: border-box;
+}
+
+.form-container {
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+    transition: transform 0.3s ease;
+}
+
+.form-container:hover {
+    transform: translateY(-5px);
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+input,
+select {
+    width: 90%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(74, 111, 165, 0.2);
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.radio-option input {
+    width: auto;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+    
+}
+
+.checkbox-group input {
+    width: auto;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 60%;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: pink;
+    color: black;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+}
+
+.form-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+
+.success {
+    color: var(--success-color);
+    background-color: #d4edda;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid #c3e6cb;
+}
+.footer {
+    width: 100%;               
+    background-color: #d6ccd3; 
+    color: #000000;           
+    text-align: center;        
+    padding: 20px 0;           
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    border-top: 5px solid #ffffff;
+    box-sizing: border-box;    
+}
+
+
+/* Míos */
+.input-error{
+    border: 1px solid red;
+}
+.p-error{
+    font-size: 0.8rem;
+    color:red;
+    margin-top:-15px;
+    margin-bottom:10px;
+}
+
+.nav-menu li{
+    display: inline-block;
+}
+
+.error{
+    color: red;
+    background-color: #e2c5c5;
+    padding: 10px;
+    border: solid 2px;
+    margin: 20px;
+}
+
+table{
+    border: 6px solid;
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+th, td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 2px solid #000000;
+}
+
+
+
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
