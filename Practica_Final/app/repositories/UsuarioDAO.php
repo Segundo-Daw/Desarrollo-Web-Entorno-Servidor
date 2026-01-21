@@ -7,7 +7,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/app/core/CoreDB.php";
 class UsuarioDAO{
 
     /**
-     * Inserta en la bc un usuario. el método hashea la contraseña antes de meterla en la bd
+     * Inserta en la bd un usuario. el método hashea la contraseña antes de meterla en la bd
      * @param Usuario $user usuario con la contraseña clara
      * @return bool true si se ha insertado bien, false si no se ha insertado (xej, ya existe un usuario con ese email)
      */
@@ -75,14 +75,5 @@ class UsuarioDAO{
 
     return null;
 }
-
-
-
-
-
-
-    public static function read($id):?Usuario{
-        return null;
-    }
 
 }

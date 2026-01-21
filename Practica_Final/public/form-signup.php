@@ -91,12 +91,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <p class="success"><?= $successMessage ?></p>
         <?php endif; ?>
 
-        <!-- Mostrar errores -->
-        <div class="errors">
-            <?= $nameError ? "<p>$nameError</p>" : "" ?>
-            <?= $emailError ? "<p>$emailError</p>" : "" ?>
-            <?= $passError ? "<p>$passError</p>" : "" ?>
-        </div>
+        
 
     <!--Incluir el formulario de signup-->
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/resources/views/components/signup.php";?>

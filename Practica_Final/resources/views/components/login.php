@@ -7,14 +7,15 @@
 
             <div class="form-group" id="email-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="tu@email.com" required>
-                <div class="error-message" id="email-error">Por favor, introduce un email válido</div>
+                <input type="email" id="email" name="email" placeholder="tu@email.com" value="<?= htmlspecialchars($email ?? '') ?>" class="<?= empty($emailError) ? '' : 'input-error' ?>" autocomplete="email" required>
             </div>
+            <?= empty($emailError) ? '' : "<p class='p-error'>$emailError</p>" ?>
+
             <div class="form-group">
                 <label for="pass">Contraseña</label>
-                <input type="password" id="pass" name="pass" placeholder="Tu contraseña" required>
-                <div class="error-message" id="pass-error">Por favor, introduce tu contraseña</div>
+                <input type="password" id="pass" name="pass" placeholder="Tu contraseña" class="<?= empty($passError) ? '' : 'input-error' ?>" autocomplete="current-password" required>
             </div>
+            <?= empty($passError) ? '' : "<p class='p-error'>$passError</p>" ?>
 
             <div class="checkbox-group">
                 <input type="checkbox" id="stay-connected" name="stay-connected">

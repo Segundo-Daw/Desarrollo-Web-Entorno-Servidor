@@ -4,8 +4,8 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Usuario.php";
 include_once $_SERVER["DOCUMENT_ROOT"] . "/app/repositories/UsuarioDAO.php";
 
 
-$email = $name = $pass = $type = "";
-$emailError = $passError = $typeError = "";
+$email = $name = $pass =  "";
+$emailError = $passError = "";
 $errors = false;
 
 
@@ -37,19 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pass = secure($_POST["pass"]);
     
 
-    //2. Verifico
-    if (strlen($email) < 6) {
-        $emailError = "Error";
-        $errors = true;
-    }
-    if (strlen($pass) < 6) {
-        $passError = "Error";
-        $errors = true;
-    }
-
-
-
-    //3. Comprobar si el usuario existe
+    //2. Comprobar si el usuario existe
     if (!$errors) {
 
         $usuario = UsuarioDAO::findByEmail($email);
@@ -105,35 +93,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if(isset($_SESSION["error"])){
                 $err = $_SESSION["error"];
                 echo "<p class='error'>$err</p>";
+                unset($_SESSION["error"]); //para que no me salga constantemente el mensaje de que me estoy intentado colar
             }
-
         ?>
 
-        <!--Si el mail es incorrecto salta el mensaje de error y te deja en la misma página -->
-        <?php if ($emailError): ?>
-            <p class="error"><?= $emailError ?></p>
-        <?php endif; ?>
-
-        <!--Si la contraseña es incorrecto salta el mensaje de error y te deja en la misma página -->
-        <?php if ($passError): ?>
-            <p class="error"><?= $passError ?></p>
-        <?php endif; ?>
-
-
-
+        
         <?php include_once $_SERVER["DOCUMENT_ROOT"] . "/resources/views/components/login.php"; ?>
 
           <!-- Incluir footer -->
         <?php include $_SERVER['DOCUMENT_ROOT'] . "/resources/views/layouts/footer.php";?>
-        
-
     </main>
-
-     
-
-
-
-
-    
 </body>
 </html>

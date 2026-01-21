@@ -7,7 +7,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/app/repositories/PerroDAO.php";
 require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Perro.php";
 
 if(!(isset($_COOKIE["stay-connected"]) or isset($_SESSION["origin"]))){
-    $_SESSION["error"] = "· Te has intentado colar en el index ·";
+    $_SESSION["error"] = "Primero tienes que iniciar sesión ¡No te cueles en el Index!";
     header("Location: form-login.php");
     exit();
 }
@@ -58,91 +58,94 @@ $perros = PerroDAO::findAll();
     <!-- Incluir cabecera -->
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/resources/views/layouts/header-index.php";?>
 
-    
-
     <?php
     require_once $_SERVER["DOCUMENT_ROOT"] . "/app/repositories/UsuarioDAO.php";
     require_once $_SERVER["DOCUMENT_ROOT"] . "/app/models/Usuario.php";
 
     ?>
     <main>
-    <div class="titulo">
-        <h1>Gestión de Perros del Hotel</h1>
-        <h2>Registrar Nuevo Perro</h2>
-    </div>
+        <div class="titulo">
+            <h1>Gestión de Perros del Hotel</h1>
+            <h2>Registrar Nuevo Perro</h2>
+        </div>
 
         <div class="container">
-            
-            <form method="POST" action="index.php">
-                <input type="hidden" name="accion" value="añadir">
-                
-                <input type="text" name="name" placeholder="Nombre" required>
-                <input type="number" name="age" placeholder="Edad" required>
-                <input type="number" name="numberDays" placeholder="Días de estancia" required>
-                <input type="text" name="type" placeholder="Tipo (ej. Grande/Pequeño)" required>
-                <input type="text" name="raza" placeholder="Raza" required>
-                
-                
+            <div class= "form-container">
+                <form method="POST" action="index.php">
 
-            <div class="checkbox-group">
-                <input type="checkbox" name="muerde"> 
-                <label for="muerde">¿Muerde?</label>
+                    <input type="hidden" name="accion" value="añadir">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" name="name" placeholder="Nombre de tu mascota" required>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="age">Edad</label>
+                        <input type="number" name="age" placeholder="Años de tu mascota" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numberDays">Días</label>
+                        <input type="number" name="numberDays" placeholder="Días de estancia" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Tipo de perro</label>
+                        <input type="text" name="type" placeholder="Grande/Pequeño" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="raza">Raza</label>
+                        <input type="text" name="raza" placeholder="pastor alemán, mestizo..." required>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="muerde"> 
+                        <label for="muerde">¿Muerde?</label>
+                    </div>
+                    <br>
+
+                    <button type="submit">Añadir al Hotel</button>
+                </form>
             </div>
-                <button type="submit">Añadir al Hotel</button>
-            </form>
-</div>
-
-        <hr>
+        </div>
+        
         <div class="titulo">
             <h2>Perros Hospedados</h2>
         </div>
-        <div class="container">
-            <?php if ($resultado && $resultado->num_rows > 0): ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Raza</th>
-                            <th>Días</th>
-                            <th>¿Muerde?</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                
-                    <?php while($p = $resultado->fetch_assoc()): ?>
+
+        <?php if ($resultado && $resultado->num_rows > 0): ?>
+            <table>
+                <thead>
                     <tr>
-                        <td><?= htmlspecialchars($p["name"]) ?></td>
-                        <td><?= htmlspecialchars($p["raza"]) ?></td>
-                        <td><?= $p["numberDays"] ?></td>
-                        <td><?= $p["muerde"] ? "Sí" : "No" ?></td>
-                        <td>
-                            <form method="POST" action="index.php">
-                                <input type="hidden" name="accion" value="eliminar">
-                                <input type="hidden" name="id_perro" value="<?= $p["id"] ?>">
-                                <button type="submit" onclick="return confirm('¿Borrar registro?')">Eliminar</button>
-                            </form>
-                        </td>
+                        <th>Nombre</th>
+                        <th>Raza</th>
+                        <th>Días</th>
+                        <th>¿Muerde?</th>
+                        <th>Acción</th>
                     </tr>
-                    <?php endwhile; ?>
-                </table>
-            <?php else: ?>
-
-                <p>No hay perros registrados.</p>
-                
-            <?php endif; ?>
-
-            </div>
+                </thead>
+            
+                <?php while($p = $resultado->fetch_assoc()): ?>
+                <tr>
+                    <td><?= htmlspecialchars($p["name"]) ?></td>
+                    <td><?= htmlspecialchars($p["raza"]) ?></td>
+                    <td><?= $p["numberDays"] ?></td>
+                    <td><?= $p["muerde"] ? "Sí" : "No" ?></td>
+                    <td>
+                        <form method="POST" action="index.php">
+                            <input type="hidden" name="accion" value="eliminar">
+                            <input type="hidden" name="id_perro" value="<?= $p["id"] ?>">
+                            <button type="submit" onclick="return confirm('¿Borrar registro?')">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </table>
+        <?php else: ?>
+            <p>No hay perros registrados por el momento.</p>
+        <?php endif; ?>
     </main>
-
-
-
-
-
-     
-
     <!-- Incluir footer -->
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/resources/views/layouts/footer.php";?>
-    
 </body>
 </html>

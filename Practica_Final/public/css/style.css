@@ -106,6 +106,7 @@ body{
 }
 
 .titulo{
+    margin-top: 20px;
     text-align: center;
 }
 
@@ -118,9 +119,11 @@ body{
 
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 100px;
     box-sizing: border-box;
+    align-items: center;
 }
 
 .form-container {
@@ -267,7 +270,7 @@ button:hover {
     border: 1px solid red;
 }
 .p-error{
-    font-size: 0.8rem;
+    font-size: 1rem;
     color:red;
     margin-top:-15px;
     margin-bottom:10px;
@@ -282,7 +285,11 @@ button:hover {
     background-color: #e2c5c5;
     padding: 10px;
     border: solid 2px;
+    border-radius: 20px;
     margin: 20px;
+    max-width: 40%;
+    text-align: center;
+    margin: 0 auto;
 }
 
 table{
