@@ -7,9 +7,11 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/app/core/CoreDB.php";
 class UsuarioDAO{
 
     /**
-     * Inserta en la bd un usuario. el método hashea la contraseña antes de meterla en la bd
-     * @param Usuario $user usuario con la contraseña clara
-     * @return bool true si se ha insertado bien, false si no se ha insertado (xej, ya existe un usuario con ese email)
+     * Inserta en la base de datos un usuario.
+     * El método hashea la contraseña antes de almacenarla.
+     *
+     * @param Usuario $usuario Usuario con la contraseña en texto plano
+     * @return int ID del usuario insertado, o 0 si no se insertó
      */
     public static function  create($usuario) {
         
@@ -39,6 +41,12 @@ class UsuarioDAO{
     }
 
 
+    /**
+     * Comprueba si existe un usuario con el email indicado.
+     *
+     * @param string $email Email a comprobar
+     * @return bool True si existe un usuario con ese email, false en caso contrario
+     */
     public static function existsByEmail(string $email): bool {
         $conn = CoreDB::getConnection();
         $sql = "SELECT id FROM usuarios WHERE email = ? LIMIT 1";
@@ -55,25 +63,29 @@ class UsuarioDAO{
         return $exists;
     }
 
-
+    /**
+     * Busca un usuario por su email y devuelve el objeto Usuario con toda su información.
+     *
+     * @param string $email Email del usuario a buscar
+     * @return Usuario|null Objeto Usuario si existe, o null si no se encuentra
+     */
     public static function findByEmail(string $email): ?Usuario {
-    $conn = CoreDB::getConnection();
-    $sql = "SELECT * FROM usuarios WHERE email = ? LIMIT 1";
-    $ps = $conn->prepare($sql);
-    $ps->bind_param("s", $email);
-    $ps->execute();
+        $conn = CoreDB::getConnection();
+        $sql = "SELECT * FROM usuarios WHERE email = ? LIMIT 1";
+        $ps = $conn->prepare($sql);
+        $ps->bind_param("s", $email);
+        $ps->execute();
 
-    $result = $ps->get_result();
+        $result = $ps->get_result();
 
-    if ($row = $result->fetch_assoc()) {
-        return new Usuario(
-            $row["name"],
-            $row["email"],
-            $row["pass"]
-        );
+        if ($row = $result->fetch_assoc()) {
+            return new Usuario(
+                $row["name"],
+                $row["email"],
+                $row["pass"]
+            );
+        }
+        return null;
     }
-
-    return null;
-}
 
 }

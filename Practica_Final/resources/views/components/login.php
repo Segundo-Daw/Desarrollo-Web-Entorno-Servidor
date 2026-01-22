@@ -4,7 +4,6 @@
         <h2>Iniciar Sesión</h2>
         <form id="loginForm" action="<?= $_SERVER["PHP_SELF"] ?>" method="post">
             
-
             <div class="form-group" id="email-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="tu@email.com" value="<?= htmlspecialchars($email ?? '') ?>" class="<?= empty($emailError) ? '' : 'input-error' ?>" autocomplete="email" required>

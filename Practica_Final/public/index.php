@@ -1,5 +1,10 @@
 <?php
 session_start();
+//declaramos las variables
+$name = $age = $numberDays = $type  = $raza = $muerde = "";
+$nameError = $ageError = $numberDaysError = $type = $raza = "";
+$errors = false;
+
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/app/core/CoreDB.php"; 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/utils/funciones.php";
@@ -17,8 +22,8 @@ $conexion = CoreDB::getConnection();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["accion"]) && $_POST["accion"] == "añadir") {
     $name = secure($_POST["name"]);
-    $age = intval($_POST["age"]);
-    $numberDays = intval($_POST["numberDays"]);
+    $age = intval(secure($_POST["age"])); // intval = para garantizar que es un número
+    $numberDays = intval(secure($_POST["numberDays"]));
     $type = secure($_POST["type"]);
     $raza = secure($_POST["raza"]);
     $muerde = isset($_POST["muerde"]) ? 1 : 0; // 1 si muerde, 0 si no
@@ -26,8 +31,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["accion"]) && $_POST["a
     //CREAMOS AL PERRO
     $perro = new Perro($raza,$muerde,$name,$age,$numberDays,$type);
 
-    //GUARDAMOS EN LA BASE DE DATOS
-    $id = PerroDAO::create($perro);
+    //verificaciones de los campos
+    if (empty($name)){
+        $errors = true;
+        $nameError = "Es obligatorio que pongas un nombre";
+    }
+    if ($age <= 0){
+        $errors = true;
+        $ageError = "Es obligatorio que introduzcas la edad (mayor que 0)";
+    }
+     if ($numberDays <=0){
+        $errors = true;
+        $numberDaysError = "Es obligatorio indicar los días de estancia (min 1 día)";
+    }
+     if (empty($type)){
+        $errors = true;
+        $typeError = "Es obligatorio indicar el tamaño";
+    }
+     if (empty($raza)){
+        $errors = true;
+        $razaError = "Es obligatorio indicar la raza";
+    }else if(!$errors){
+        //GUARDAMOS EN LA BASE DE DATOS
+        $id = PerroDAO::create($perro);
+    }
+
 }
 
 
@@ -66,6 +94,8 @@ $perros = PerroDAO::findAll();
     <main>
         <div class="titulo">
             <h1>Gestión de Perros del Hotel</h1>
+        </div>
+        <div class="titulo2">
             <h2>Registrar Nuevo Perro</h2>
         </div>
 
@@ -76,27 +106,37 @@ $perros = PerroDAO::findAll();
                     <input type="hidden" name="accion" value="añadir">
                     <div class="form-group">
                         <label for="name">Nombre</label>
-                        <input type="text" name="name" placeholder="Nombre de tu mascota" required>
+                        <input type="text" name="name" placeholder="Nombre de tu mascota" value="<?=$name?>" class="<?= empty($nameError) ? '' : 'input-error' ?>">
                     </div>
+                    <?= empty($nameError) ? "" : "<p class='p-error'>$nameError</p>" ?>
 
                     <div class="form-group">
                         <label for="age">Edad</label>
-                        <input type="number" name="age" placeholder="Años de tu mascota" required>
+                        <input type="number" name="age" placeholder="Años de tu mascota" value="<?=$age?>" class="<?= empty($ageError) ? '' : 'input-error' ?>">
                     </div>
+                    <?= empty($ageError) ? "" : "<p class='p-error'>$ageError</p>" ?>
+
 
                     <div class="form-group">
                         <label for="numberDays">Días</label>
-                        <input type="number" name="numberDays" placeholder="Días de estancia" required>
+                        <input type="number" name="numberDays" placeholder="Días de estancia" value="<?=$numberDays?>" class="<?= empty($numberdaysError) ? '' : 'input-error' ?>">
                     </div>
+                    <?= empty($numberDaysError) ? "" : "<p class='p-error'>$numberDaysError</p>" ?>
+
 
                     <div class="form-group">
                         <label for="type">Tipo de perro</label>
-                        <input type="text" name="type" placeholder="Grande/Pequeño" required>
+                        <input type="text" name="type" placeholder="Grande/Pequeño" value="<?=$type?>" class="<?= empty($typeError) ? '' : 'input-error' ?>">
                     </div>
+                    <?= empty($typeError) ? "" : "<p class='p-error'>$typeError</p>" ?>
+
 
                     <div class="form-group">
                         <label for="raza">Raza</label>
-                        <input type="text" name="raza" placeholder="pastor alemán, mestizo..." required>
+                        <input type="text" name="raza" placeholder="pastor alemán, mestizo..." value="<?=$raza?>" class="<?= empty($razaError) ? '' : 'input-error' ?>">
+                    </div>
+                    <?= empty($razaError) ? "" : "<p class='p-error'>$razaError</p>" ?>
+
                     
                     <div class="checkbox-group">
                         <input type="checkbox" name="muerde"> 
@@ -109,41 +149,48 @@ $perros = PerroDAO::findAll();
             </div>
         </div>
         
-        <div class="titulo">
-            <h2>Perros Hospedados</h2>
+        <div class="titulo2">
+            <h2>· Perros Hospedados Actualmente · </h2>
         </div>
-
-        <?php if ($resultado && $resultado->num_rows > 0): ?>
-            <table>
-                <thead>
+        <div class="container">
+            <div class="form-container-hospedados">
+            <?php if ($resultado && $resultado->num_rows > 0): ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Raza</th>
+                            <th>Edad</th>
+                            <th>Días</th>
+                            <th>¿Muerde?</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                
+                    <?php while($p = $resultado->fetch_assoc()): ?>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Raza</th>
-                        <th>Días</th>
-                        <th>¿Muerde?</th>
-                        <th>Acción</th>
+                        <td><?=$p["id"]?></td>
+                        <td><?= htmlspecialchars($p["name"]) ?></td>
+                        <td><?= htmlspecialchars($p["raza"]) ?></td>
+                        <td><?= $p["age"] ?></td>
+                        <td><?= $p["numberDays"] ?></td>
+                        <td><?= $p["muerde"] ? "Sí" : "No" ?></td>
+                        <td>
+                            <form method="POST" action="index.php">
+                                <input type="hidden" name="accion" value="eliminar">
+                                <input type="hidden" name="id_perro" value="<?= $p["id"] ?>">
+                                <button type="submit" onclick="return confirm('¿Borrar registro?')">Eliminar</button>
+                            </form>
+                        </td>
                     </tr>
-                </thead>
-            
-                <?php while($p = $resultado->fetch_assoc()): ?>
-                <tr>
-                    <td><?= htmlspecialchars($p["name"]) ?></td>
-                    <td><?= htmlspecialchars($p["raza"]) ?></td>
-                    <td><?= $p["numberDays"] ?></td>
-                    <td><?= $p["muerde"] ? "Sí" : "No" ?></td>
-                    <td>
-                        <form method="POST" action="index.php">
-                            <input type="hidden" name="accion" value="eliminar">
-                            <input type="hidden" name="id_perro" value="<?= $p["id"] ?>">
-                            <button type="submit" onclick="return confirm('¿Borrar registro?')">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-            </table>
-        <?php else: ?>
-            <p>No hay perros registrados por el momento.</p>
-        <?php endif; ?>
+                    <?php endwhile; ?>
+                </table>
+            <?php else: ?>
+                <p>No hay perros registrados por el momento.</p>
+            <?php endif; ?>
+            </div>
+            </div>
     </main>
     <!-- Incluir footer -->
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/resources/views/layouts/footer.php";?>

@@ -7,10 +7,12 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/app/core/CoreDB.php";
 class PerroDAO{
 
     /**
-     * Inserta en la bc un perro
+     * Inserta un perro en la base de datos y asigna el ID generado al objeto.
+     *
+     * @param Perro $perro Objeto Perro con los datos a almacenar
+     * @return int ID del perro insertado en la base de datos
      */
     public static function  create($perro) {
-        
         //conexión
         $conn = CoreDB::getConnection(); 
         //sentencia preparada
@@ -37,19 +39,29 @@ class PerroDAO{
         
     }
 
-        //conexión
-        public static function deleteById($id): bool {
-            $conn = CoreDB::getConnection();
-            $sql = "DELETE FROM perros WHERE id = ?";
-            $ps = $conn->prepare($sql);
-            $ps->bind_param("i", $id);
-            $ps->execute();
-            $id = $ps->insert_id;
+    /**
+     * Elimina un perro de la base de datos a partir de su identificador.
+     *
+     * @param int $id Identificador del perro a eliminar
+     * @return bool Devuelve true si la operación se realizó correctamente, false en caso contrario
+    */
+    public static function deleteById($id): bool {
+        $conn = CoreDB::getConnection();
+        $sql = "DELETE FROM perros WHERE id = ?";
+        $ps = $conn->prepare($sql);
+        $ps->bind_param("i", $id);
+        $ps->execute();
 
-            $conn->close();
-            return $id;
-        }
+        $result = $ps->affected_rows > 0;
+        $conn->close();
+        return $result;
+    }
 
+    /**
+     * Obtiene todos los perros almacenados en la base de datos mostrando su información.
+     *
+     * @return Perro[] Array de objetos Perro
+     */
     public static function findAll(): array {
         $conn = CoreDB::getConnection();
         $sql = "SELECT * FROM perros";
@@ -67,16 +79,7 @@ class PerroDAO{
                 $row["id"]
             );
         }
-
         $conn->close();
         return $perros;
-    }
-
-
-
-
-
-
-
-    
+    }  
 }
