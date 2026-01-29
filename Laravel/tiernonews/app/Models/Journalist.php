@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Psy\CodeCleaner\FinalClassPass;
 
 class Journalist extends Model
 {
@@ -11,5 +12,7 @@ class Journalist extends Model
     private string $surname;
     private string $email;
     private string $password;
+
+    
     
 }
