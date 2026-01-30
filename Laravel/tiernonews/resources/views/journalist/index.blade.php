@@ -13,7 +13,8 @@
     </style>
 </head>
 <body>
-    <h1>Journalists</h1>
+    @include("components.header")
+    <h2>Journalists</h2>
     <p class="bg-info">Estos son las y los periodistas de mi BD</p>
     <!-- Con las dos llaves lo que hacemos es acceder a la variable y leer su contenido-->
     @foreach ($journalists as $j)
