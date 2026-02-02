@@ -4,52 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Journalists</title>
+    <title>Document</title>
     <style>
         body{
             background: #DED5D3;
         }
-
     </style>
 </head>
 <body>
     @include("components.header")
-    <!-- Con las dos llaves lo que hacemos es acceder a la variable y leer su contenido-->
     <div class="container">
-        
-    <div class="row mt-5">
-        <div class="col text-center">
-            <h2>Journalists</h2>
-        </div>
-    </div>
-
-    <div class="row mt-3">
-        @foreach ($journalists as $j)
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-footer  text-center">
+        <div class="row">
+            <div class="col mt-5">
+                <div class="card shadow-sm h-100">
+                    <div class="card-footer text-center">
                         Periodista
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">
-                            {{ $j->name }} {{ $j->surname }}
+                            {{ $journalist->name }} {{ $journalist->surname }}
                         </h5>
 
                         <p class="card-text">
                             <strong>Email:</strong><br>
-                            {{ $j->email }}
+                            {{ $journalist->email }}
                         </p>
                         <p class="card-text">
                             <strong>Contraseña:</strong><br>
-                            {{ $j->password }}
+                            {{ $journalist->password }}
                         </p>
-                        <button class="btn btn-warning">Editar</button>
-                        <button class="btn btn-dark">Eliminar</button>
                     </div>
                 </div>
             </div>
-        @endforeach
+        </div>
     </div>
-</div>
 </body>
 </html>
+
+
+            

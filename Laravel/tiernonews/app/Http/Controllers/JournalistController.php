@@ -41,16 +41,31 @@ class JournalistController extends Controller
     public function store(Request $request)
     {
         //return "Ahora te lo guardo";
-        Log::channel('stderr')->debug("Variable request: ", [$request->name,$request->password]);
-        $j = new Journalist();
+        //Para acceder a los campos del formulario, simplemente $request->nombre-del-input
+        //equivalente a $request->input(nombre-del-input)
+        //Log::channel('stderr')->debug("Variable request: ", [$request->all()]);
         
+        $j = new Journalist($request->all());
+        Log::channel('stderr')->debug("Variable request: ", [$j->email]);
+        //Con la siguiente orden se guarda en la BD:
+        $j->save();
+        //Para crear el index, tengo qye buscar todos los periodistas en la BD
+        $journalists = Journalist::all();
+        return view('journalist.index', compact("journalists"));
+
+
     }
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        return "no está hecho";
+        // 1. Busco en la BD a ese periodista
+        $journalist = Journalist::find($id);
+
+        // 2. Devuelvo una vista con la información del periodista
+
+        return view('journalist.show', compact("journalist"));
     }
 
     /**
@@ -59,6 +74,10 @@ class JournalistController extends Controller
      */
     public function edit(string $id)
     {
+        // 1. Busco el preiodista en la BD
+        $journalist = Journalist::find($id);
+        // 2. Devuelvo la vista con el formulario de edición
+        return view('journalist.edit', compact("journalist"));
         
     }
 
@@ -68,7 +87,20 @@ class JournalistController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Voy a actulizar todo menos la contraseña
+        // 1. nusco en la BD el journalist con ese id
+        $journalist = Journalist::find($id);
+        // 2. Actualizo los campos correspondientes
+        $journalist->name= $request->name; //aqui está lo rellenado en el input name
+        $journalist->surname= $request->surname;
+        $journalist->email= $request->email;
+
+        // 3. Hago el update
+        $journalist->update();
+
+        //4. Devuelvo al show
+        return view('journalist.show', compact("journalist"));
+
     }
 
     /**
