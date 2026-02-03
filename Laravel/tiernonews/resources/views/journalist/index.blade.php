@@ -17,39 +17,57 @@
     <!-- Con las dos llaves lo que hacemos es acceder a la variable y leer su contenido-->
     <div class="container">
         
-    <div class="row mt-5">
-        <div class="col text-center">
-            <h2>Journalists</h2>
+        <div class="row mt-5">
+            <div class="col text-center">
+                <h2>Journalists</h2>
+            </div>
         </div>
-    </div>
+    
 
-    <div class="row mt-3">
-        @foreach ($journalists as $j)
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-footer  text-center">
-                        Periodista
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            {{ $j->name }} {{ $j->surname }}
-                        </h5>
+        <div class="row mt-3">
+            @if(@session('deleted'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('deleted') }}
+                </div>
+            @endif
+            @foreach ($journalists as $j)
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-footer  text-white text-center bg-dark">
+                            Periodista
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ $j->name }} {{ $j->surname }}
+                            </h5>
 
-                        <p class="card-text">
-                            <strong>Email:</strong><br>
-                            {{ $j->email }}
-                        </p>
-                        <p class="card-text">
-                            <strong>Contraseña:</strong><br>
-                            {{ $j->password }}
-                        </p>
-                        <button class="btn btn-warning">Editar</button>
-                        <button class="btn btn-dark">Eliminar</button>
+                            <p class="card-text">
+                                <strong>Email:</strong><br>
+                                {{ $j->email }}
+                            </p>
+                            <p class="card-text">
+                                <strong>Contraseña:</strong><br>
+                                {{ $j->password }}
+                            </p>
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <a href= "{{ route('journalist.edit', $j->id) }}"><button class="btn btn-warning">Editar</button></a>
+                                </div>
+                                <div class="col">
+                                    <form method = "post" action="{{ route('journalist.destroy', $j->id) }}">
+                                        @csrf
+                                        @method("DELETE")
+                                        <button class="btn btn-secondary">Eliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
-</div>
 </body>
 </html>

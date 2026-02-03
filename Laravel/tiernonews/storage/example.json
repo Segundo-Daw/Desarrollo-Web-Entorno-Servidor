@@ -1,0 +1,17 @@
+{
+    "name" : "Luis",
+    "surname" : "Ramirez",
+    "email" : "l@l.com",
+    "password" : "admin",
+    "job" : {
+        "newspaper" : "El país",
+        "department" : "Internacional"
+    },
+    "article" :{
+        "title" : "El profeta",
+        "content" : "Los mortifagos invadieron..."
+    },
+    "awards" : ["world press photo", "pulitz"]
+}
+
+

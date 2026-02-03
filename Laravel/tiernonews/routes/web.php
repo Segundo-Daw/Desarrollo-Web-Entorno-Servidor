@@ -29,10 +29,11 @@ Route::get("/journalist/create", [JournalistController::class, "create"])->name(
 //al darle un nombre a la ruta, lluego la puedo utlizar para referenciarla desde el resto de mi proyecto
 Route::post("/journalist", [JournalistController::class, "store"])->name('journalist.store');
 Route::get("/journalist/{id}", [JournalistController::class, "show"]);
-Route::get("/journalist/{id}/edit", [JournalistController::class, "edit"]);
+Route::get("/journalist/{id}/edit", [JournalistController::class, "edit"])->name('journalist.edit');
 
 Route::put("/journalist/{id}", [JournalistController::class, "update"])->name('journalist.update');
-Route::delete("/journalist/{id}", [JournalistController::class, "destroy"]);
+
+Route::delete("/journalist/{id}", [JournalistController::class, "destroy"])->name('journalist.destroy');
 
 
 
