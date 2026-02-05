@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\JournalistController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,6 @@ Route::delete("/journalist/{id}", [JournalistController::class, "destroy"])->nam
 
 
 
-
+Route::resource("/article", ArticleController::class);
 
 

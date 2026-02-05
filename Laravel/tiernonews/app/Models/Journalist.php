@@ -19,6 +19,11 @@ class Journalist extends Model
     //Este fillable lo que hace es crear un constructor que recibe un solo parámetro: un array asociativo con las claves los nombre de los atributos
     protected $fillable =["id", "name", "surname", "email", "password"];
 
+    //Un periodista tiene varios articulos (1-n)
+    public function articles(){
+        return $this->hasMany(Article::class);
+    }
+
     
     
 }

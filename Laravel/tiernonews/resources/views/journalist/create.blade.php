@@ -23,6 +23,14 @@
     -->
     <div class="container">
         <div class="row mt-5 justify-content-center">
+
+            @if($errors->any()){
+                @foreach($errors->all() as $error)
+                <p>{{ $error }}</p>
+                @endforeach
+            }
+            @endif
+
             <div class="col-md-6">
                 <form action="{{ route('journalist.store') }}" method="post">
                     <!-- @csrf Lo que hace es añadir un campo hidden con un token imprescindible para que laravel deje continuar-->
@@ -31,13 +39,13 @@
                     <!-- Nombre -->
                     <div class="col mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input name="name" type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" required>
+                        <input name="name" type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre">
                     </div>
 
                     <!-- Apelllido -->
                     <div class="col mb-3">
                         <label for="apellido" class="form-label">Apellido</label>
-                        <input name="surname" type="text" class="form-control" id="apellido" placeholder="Ingrese su apellido" required>
+                        <input name="surname" type="text" class="form-control" id="apellido" placeholder="Ingrese su apellido">
                     </div>
 
                     <!-- Correo -->
