@@ -49,8 +49,8 @@ class JournalistController extends Controller
 
         //Antes de guardar en la BD se hacen validaciones.
         $request->validate([
-            'name' => 'required', 
-            'password' => 'min:4|required',
+            'name' => 'min:3|required', 
+            'password' => 'min:4|required|confirmed',
             'email' => 'unique:journalists,email|required' 
         ]);
 
@@ -59,7 +59,8 @@ class JournalistController extends Controller
         //Para crear el index, tengo qye buscar todos los periodistas en la BD
         //$journalists = Journalist::all();
         //return view('journalist.index', compact("journalists"));
-        return redirect()->route('journalist.create');
+        $message = "Periodista " . $j->name . " creado correctamente";
+        return redirect()->route('journalist.create')->with('store', $message);
 
 
     }
@@ -123,7 +124,7 @@ class JournalistController extends Controller
         }else{
             // 2. Eliminamos
             Journalist::destroy($id);
-            $message = "Periodista " . $j->name . "eliminado";
+            $message = "Periodista " . $j->name . " eliminado";
         }
     
         // 3. devolvemos al index con un mensajito

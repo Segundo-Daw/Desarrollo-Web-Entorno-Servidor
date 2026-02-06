@@ -29,13 +29,12 @@ Route::get("/journalist/create", [JournalistController::class, "create"])->name(
 //Esto es para guardar el journalist con los datos rellenados del formulario de creación
 //al darle un nombre a la ruta, lluego la puedo utlizar para referenciarla desde el resto de mi proyecto
 Route::post("/journalist", [JournalistController::class, "store"])->name('journalist.store');
-Route::get("/journalist/{id}", [JournalistController::class, "show"]);
+Route::get("/journalist/{id}", [JournalistController::class, "show"])->name('journalist.show');
 Route::get("/journalist/{id}/edit", [JournalistController::class, "edit"])->name('journalist.edit');
 
 Route::put("/journalist/{id}", [JournalistController::class, "update"])->name('journalist.update');
 
 Route::delete("/journalist/{id}", [JournalistController::class, "destroy"])->name('journalist.destroy');
-
 
 
 Route::resource("/article", ArticleController::class);

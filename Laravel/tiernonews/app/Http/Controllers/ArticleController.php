@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class ArticleController extends Controller
 {
@@ -12,7 +14,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::all();
+        return view('article.index', compact("articles"));
     }
 
     /**
@@ -20,16 +23,30 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        //devuelve una vista con un formulario de creación
+        return view('article.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crear artiuclos a través del formulario.
      */
     public function store(Request $request)
     {
-        //
+        $a = new Article($request->all());
+
+        //Antes de guardar en la BD se hacen validaciones.
+        $request->validate([
+            'title' => 'required', 
+            'content' => 'required',
+            'readers' => 'min:1|required'
+        ]);
+
+        $a->save();
+        return redirect()->route('article.create');
     }
+
+
+
 
     /**
      * Display the specified resource.

@@ -22,14 +22,20 @@
                 <h2>Journalists</h2>
             </div>
         </div>
+
+        <!-- Para que salga el mensaje de que se ha eliminado correctamente el periodista-->
+        <div class="row mt-5">
+            <div class="col text-center">
+                 @if(@session('deleted'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('deleted') }}
+                    </div>
+                @endif
+            </div>
+        </div>
     
 
         <div class="row mt-3">
-            @if(@session('deleted'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('deleted') }}
-                </div>
-            @endif
             @foreach ($journalists as $j)
                 <div class="col-md-4 mb-4">
                     <div class="card">
@@ -60,6 +66,9 @@
                                         @method("DELETE")
                                         <button class="btn btn-secondary">Eliminar</button>
                                     </form>
+                                </div>
+                                <div class="col">
+                                    <a href= "{{ route('journalist.show', $j->id) }}"><button class="btn btn-info">Ver</button></a>
                                 </div>
                             </div>
                             
