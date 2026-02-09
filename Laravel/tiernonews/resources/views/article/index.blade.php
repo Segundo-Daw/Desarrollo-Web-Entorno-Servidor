@@ -33,6 +33,10 @@
                 {{ $a->title }}
               </p>
               <p class="card-text">
+                  <strong>Número de lectores:</strong><br>
+                    {{ $a->readers }}
+              </p>
+              <p class="card-text">
                   <strong>Contenido:</strong><br>
                     {{ $a->content }}
               </p>
