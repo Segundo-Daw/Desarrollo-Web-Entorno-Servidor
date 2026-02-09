@@ -51,25 +51,34 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
+    public function show(Article $id)
     {
-        //
+        $article = Article::find($id);
+        return view('article.show', compact("article"));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Article $article)
+    public function edit(Article $id)
     {
-        //
+        $article = Article::find($id);
+        return view('article.edit', compact("article"));
+
     }
 
+
+    
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, Article $id)
     {
-        //
+       
+        
+
     }
 
     /**

@@ -22,37 +22,40 @@
     <div class="row">
 
       <!-- Artículos -->
-      <div class="col-md-8">
+      <div class="col md-8">
+        @foreach ($articles as $a)
+          <div class="card">
+            <div class="card-footer text-white text-center bg-dark">
+              Articulo
+            </div>
+            <div class="card-doby">
+              <p class="card-title">Título
+                {{ $a->title }}
+              </p>
+              <p class="card-text">
+                  <strong>Contenido:</strong><br>
+                    {{ $a->content }}
+              </p>
 
-        <!-- Artículo -->
-        <article class="card mb-4">
-          <div class="card-body">
-            <h2 class="card-title">Título del artículo</h2>
-            <p class="card-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi libero magnam voluptates placeat maxime vitae nesciunt voluptatum aut pariatur natus, a optio velit! Ullam nesciunt fugit, dolore quod illum iste.
-            </p>
+              <div class="row">
+                <div class="col">
+                    <a href= "{{ route('article.edit', $a->id) }}"><button class="btn btn-warning">Editar</button></a>
+                </div>
+                <div class="col">
+                  <form method = "post" action="{{ route('article.destroy', $a->id) }}">
+                    @csrf
+                    @method("DELETE")
+                    <button class="btn btn-secondary">Eliminar</button>
+                    </form>
+                </div>
+                <div class="col">
+                  <a href= "{{ route('article.show', $a->id) }}"><button class="btn btn-info">Ver</button></a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="card-footer text-muted">
-            Publicado el 6 Feb 2026
-          </div>
-        </article>
-
-        <!-- Repetir más artículos -->
-
-        <!-- Paginación -->
-        <nav>
-          <ul class="pagination">
-            <li class="page-item disabled"><a class="page-link">Anterior</a></li>
-            <li class="page-item active"><a class="page-link">1</a></li>
-            <li class="page-item"><a class="page-link">2</a></li>
-            <li class="page-item"><a class="page-link">Siguiente</a></li>
-          </ul>
-        </nav>
-
+        @endforeach
       </div>
-
-      
-
     </div>
   </main>
 

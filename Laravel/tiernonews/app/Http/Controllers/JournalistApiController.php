@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Journalist;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Log;
 
 class JournalistApiController extends Controller
 {
@@ -25,10 +27,32 @@ class JournalistApiController extends Controller
      */
     public function store(Request $request)
     {
-        $j = new Journalist($request->all());
-        $j->save();
-        return response()->json($j);
+        $errors = false;
+
+        //validaciones
+        if(!isset($request->name)){
+            $errors=true;
+        }else if(!isset($request->password)){
+            $errors=true;
+        }
+
+        if(!$errors){
+            $j = new Journalist($request->all());
+            //ver si esta mal
+            $j->save();
+            return response()->json($j);
+        }else{
+            return response()->json([
+                "message" => "error",
+                "data" => null
+            ], JsonResponse::HTTP_NOT_FOUND);
+        }
+       
     }
+
+
+
+
 
     /**
      * Display the specified resource.
@@ -97,5 +121,40 @@ class JournalistApiController extends Controller
                 "data" => null
             ], JsonResponse::HTTP_NOT_FOUND);  //404
         }
+    }
+
+
+    //Para las búsquedas
+    public function search(Request $request){
+        Log::channel('stderr')->debug("VARIBLES DE BÚSQUEDA", [$request->name]);
+        
+        //Buscar por nombre en la base de datos
+        //SELECT * from journalists WHERE name = ?
+        /*
+        if(isset($request->name)){
+            $journalists = Journalist::where('name', $request->name)->get();
+            return response()->json($journalists);
+        }
+
+        //buscar por email
+        if(isset($request->email)){
+            $journalists = Journalist::where('email', $request->email)->get();
+            return response()->json($journalists);
+        }*/
+
+        if(isset($request->minreaders) && isset($request->maxreaders)){
+            $articles = Article::where('readers', '>=', $request->minreaders)->where('readers', '<=', $request->maxreaders)->get();
+            return response()->json($articles);
+        }
+
+        if(isset($request->minreaders)){
+            //Quiero devovler los artículos que tengan más de minReader readers
+            $articles = Article::where('readers', '>=', $request->minreaders)->get();
+            return response()->json($articles);
+        }
+                
+
+
+
     }
 }

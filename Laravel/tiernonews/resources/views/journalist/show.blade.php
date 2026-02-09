@@ -33,6 +33,13 @@
                             <strong>Contraseña:</strong><br>
                             {{ $journalist->password }}
                         </p>
+
+                        <h3>{{ $journalist->name }} ha escrito {{ sizeof($journalist->articles) }} artículos</h3>
+                        <ul>
+                            @foreach ($journalist->articles as $article )
+                            <li>{{ $article->title }}-{{ $article->content }} - {{ $article->readers }}</li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
