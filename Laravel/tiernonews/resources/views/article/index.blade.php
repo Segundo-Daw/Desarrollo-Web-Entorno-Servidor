@@ -48,7 +48,7 @@
                 <div class="col">
                   <form method = "post" action="{{ route('article.destroy', $a->id) }}">
                     @csrf
-                    @method("DELETE")
+                    @method('DELETE')
                     <button class="btn btn-secondary">Eliminar</button>
                     </form>
                 </div>

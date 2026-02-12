@@ -22,18 +22,25 @@
                     <h4>Modificación de Articulos</h4>
                     <!-- Titulo -->
                     <div class="col mb-3">
-                        <label for="nombre" class="form-label">TÍTULO</label>
-                        <input name="name" type="text" id="nombre" placeholder="Ingrese el título del articulo" 
-                        class="form-control">
+                        <label for="nombre" class="form-label">Título del artículo</label>
+                        <input name="title" type="text" id="nombre" placeholder="Ingrese el título del articulo" 
+                        class="form-control" value="{{ $article->title }}" >
                     </div>
 
                     <div class="col mb-3">
-                        <label for="comentario" class="form-label">ARTÍCULO</label>
+                         <label for="lectores" class="form-label">Numero Lectores</label>
+                        <input name="readers" type="text" class="form-control" id="lectores"  value="{{ $article->readers }}" >
+                    </div>
+
+                    <div class="col mb-3">
+                        <label for="comentario" class="form-label">Contenido del artículo</label>
                         <textarea
                             class="form-control"
                             id="comentario"
+                            name="content"
                             rows="4"
-                            placeholder="Comienza a escribir tu articulo..."
+                            value="{{ $article->content }}"
+                           
                         ></textarea>
                     </div>
 

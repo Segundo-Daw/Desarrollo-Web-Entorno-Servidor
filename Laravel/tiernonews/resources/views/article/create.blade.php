@@ -19,25 +19,43 @@
         
         <div class="row mt-5 justify-content-center">
             <div class="col md-6">
-                <form action="{{ route('journalist.store') }}" method="post">
+                <form action="{{ route('article.store') }}" method="post">
                     <!-- @csrf Lo que hace es añadir un campo hidden con un token imprescindible para que laravel deje continuar-->
                     @csrf
                     <h4>Formulario Creación Articulos</h4>
                     <!-- Titulo -->
                     <div class="col mb-3">
                         <label for="nombre" class="form-label">TÍTULO</label>
-                        <input name="name" type="text" id="nombre" placeholder="Ingrese el título del articulo" 
+                        <input name="title" type="text" id="nombre" placeholder="Ingrese el título del articulo" 
                         class="form-control">
-                      
-
-                         
                     </div>
+
+                    <div class="col mb-3">
+                        <label for="lectores" class="form-label">Lectores</label>
+                        <input name="readers" type="text" id="lectores" placeholder="Ingrese el número de lectores" 
+                        class="form-control">
+                    </div>
+
+                    
+                    <div class="col mb-3">
+                            <label for="journalist_id" >Periodista</label>
+                            <select name="journalist_id" id="journalist_id" class="form-select">
+                            @foreach ( $journalists as $j )
+                                <option value="{{ $j->id }}">
+                                    {{ $j->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+
 
                     <div class="col mb-3">
                         <label for="comentario" class="form-label">ARTÍCULO</label>
                         <textarea
                             class="form-control"
                             id="comentario"
+                            name="content"
                             rows="4"
                             placeholder="Comienza a escribir tu articulo..."
                         ></textarea>

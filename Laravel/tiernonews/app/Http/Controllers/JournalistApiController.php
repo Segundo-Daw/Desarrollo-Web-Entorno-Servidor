@@ -152,9 +152,24 @@ class JournalistApiController extends Controller
             $articles = Article::where('readers', '>=', $request->minreaders)->get();
             return response()->json($articles);
         }
+
+        //buscar periodistas por nombre y por email
+        //.../search?name=XXXXX&email=YYYYY
+        if(isset($request->name)&& isset($request->email)){
+            $journalists = Journalist::where('name', $request->name)
+            ->where('email', $request->email)
+            ->get();
+            return response()->json($journalists);
+        }
+
+        //buscar periodistas por nombre o por email (->orwhere)
+        //.../search?name=XXXXX&email=YYYYY
+        if(isset($request->name)&& isset($request->surname)){
+            $journalists = Journalist::where('name', $request->name)
+            ->orwhere('surname', $request->surname)
+            ->get();
+            return response()->json($journalists);
+        }
                 
-
-
-
     }
 }
