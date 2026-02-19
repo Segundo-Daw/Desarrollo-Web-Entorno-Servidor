@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,6 +18,28 @@ Route::delete("/client/{id}", [ClientController::class, "destroy"])->name('clien
 
 
 
+
+
+
+//AUTENTIFICACIÓN
+//Rutas sin autenticar:
+Route::middleware(['guest'])->group(function(){
+    //Route::get('/login',[UserController::class, 'login'])->name('login');
+});
+
+//Rutes autenticados:
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/{id}', [UserController::class, 'update'])->name('update');
+
+    Route::get('/logout', function(){
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/')->with('success', 'Sesión cerrada correctamente');
+    })->name('logout');
+});
 
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -60,16 +61,13 @@ class ClientController extends Controller
      */
     public function destroy(string $id)
     {
-         $client = Client::find($id);
-        if($client == null){
-            $message = "El cliente no existe";
-        }else{
-            // 2. Eliminamos
-            Client::destroy($id);
-            $message = "El cliente llamado " . $client->name . " ha sido eliminado";
-        }
+        
+        Order::where('client_id', $id)->delete();
+        Client::destroy($id);
 
-        $clients = Client::all();
-        return  redirect()->route('index')->with('deleted', $message);
+        
+        return  redirect()->route('index')->with('deleted_client', 'Client deleted successfuly');
     }
 }
+
+

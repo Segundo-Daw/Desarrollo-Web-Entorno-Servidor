@@ -4,6 +4,17 @@
         <ul class="navbar-nav">
             <li class="nav-item active"><a class="nav-link text-dark" href="{{ route('index') }}">Inicio</a></li>
             <li class="nav-item active"><a class="nav-link text-dark" href="{{ route('client.create') }}">Crear Cliente</a></li>
+
+            @auth
+                <li class="nav-item active"><a class="nav-link text-dark" href="{{ route('logout') }}">Logout, {{ auth()->user()->name }}</a></li>
+
+            @else
+                <li class="nav-item active"><a class="nav-link text-dark" href="{{ route('login') }}">Login</a></li>
+                <li class="nav-item active"><a class="nav-link text-dark" href="{{ route('register') }}">Register</a></li>
+
+
+
+            @endauth
            
         </ul>
     </nav>
