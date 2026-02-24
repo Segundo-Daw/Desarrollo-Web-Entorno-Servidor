@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -13,7 +14,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return view('client.create');
+
     }
 
     /**
@@ -29,7 +31,12 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "name"=> "required",
+            "surname"=>"required"
+        ]);
+        Client::create($request->all());
+        return redirect()->route('index');
     }
 
     /**
@@ -61,12 +68,12 @@ class ClientController extends Controller
      */
     public function destroy(string $id)
     {
-        
+        //Tengo que eliminar los orders asociados a ese client_id
+        Log::channel('stderr')->info('destroy', [$id]);
         Order::where('client_id', $id)->delete();
-        Client::destroy($id);
 
-        
-        return  redirect()->route('index')->with('deleted_client', 'Client deleted successfuly');
+        Client::destroy($id);
+        return redirect()->route('index')->with('deleted_client', 'Client deleted successfuly');
     }
 }
 

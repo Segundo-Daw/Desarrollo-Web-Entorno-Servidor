@@ -4,6 +4,8 @@
         <ul class="navbar-nav">
             <li class="nav-item active"><a class="nav-link text-dark" href="{{ route('index') }}">Inicio</a></li>
             <li class="nav-item active"><a class="nav-link text-dark" href="{{ route('client.create') }}">Crear Cliente</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{{ route('order.create') }}">Create order</a></li>
+
 
             @auth
                 <li class="nav-item active"><a class="nav-link text-dark" href="{{ route('logout') }}">Logout, {{ auth()->user()->name }}</a></li>

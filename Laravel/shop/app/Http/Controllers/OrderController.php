@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Order;
+use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class OrderController extends Controller
 {
@@ -23,9 +27,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $orders = Order::all();
+       $products = Product::all();
         $clients = Client::all();
-        return view('order.create', compact('orders', 'clients'));
+        return view('order.create', compact('products', 'clients'));
     }
 
     /**
@@ -33,7 +37,21 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Log::channel('stderr')->info('STORE ORDER', [$request->all()]);
+        //validación
+        $request->validate([
+            "product_id" => "required|exists:products,id",
+            "client_id" => "required|exists:clients,id"
+        ]);
+
+        //inserción
+        //Si no tiene el campo "date" la pongo al momento actual
+        $order = new Order($request->all());
+        if (!$request->exists('date')) {
+            $order->date = Carbon::now();;
+        }
+        $order->save();
+        return redirect()->route('index')->with('created_order', 'Order created');
     }
 
     /**
