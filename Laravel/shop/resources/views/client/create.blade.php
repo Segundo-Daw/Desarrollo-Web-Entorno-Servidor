@@ -8,12 +8,17 @@
     <title>Shop | Create client</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        body{
+            background: #124142;
+        }
+    </style>
 </head>
 
 <body>
     @include('components.header')
 
-    <h2>Create a client</h2>
+    <h2>Formulario de creación de cliente</h2>
     <div class="container">
         <div class="row">
             <div class="col">

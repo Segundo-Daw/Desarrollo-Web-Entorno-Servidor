@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('/dashboard/{id}', [UserController::class, 'update'])->name('update');
 
+    
+
     Route::get('/logout', function () {
         auth()->logout();
         request()->session()->invalidate();
